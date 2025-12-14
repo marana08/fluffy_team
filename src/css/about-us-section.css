@@ -1,32 +1,34 @@
 .home-feet {
+    text-align: center;
     font-weight: 700;
     font-size: 36px;
     line-height: 1.2;
     letter-spacing: -0.01em;
-    text-align: center;
     color: #02060a;
     padding-top: 65px;
     padding-bottom: 40px;
 }
 
-.about-slider-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.container-home-feet {
+    max-width: 335px;
 }
 
 .about-slider {
     display: flex;
-    gap: 24px;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 60px;
     overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
+.about-slider-wrapper {
+    position: relative;
+}
+
 .about-card {
     position: relative;
-    min-width: 335px;
-    height: 402px;
-    overflow: hidden;
+    overflow: auto;
     flex-shrink: 0;
 }
 
@@ -34,6 +36,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .about-card::after {
@@ -54,10 +57,17 @@
     font-size: 16px;
     line-height: 1.5;
     font-weight: 400;
+    max-width: 90%;
 }
 
 .about-nav {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
     justify-content: center;
+    align-items: center;
     border: 1px solid #c3b49d;
     border-radius: 8px;
     width: 48px;
@@ -66,7 +76,103 @@
     cursor: pointer;
 }
 
+.about-slider-wrapper>.about-nav { /* прибирає кнопки на мобільних */
+    display: flex;
+}
+
 .pagination {
     display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 24px;
+    padding-bottom: 64px;
+}
+
+.pagination-dots {
+    display: flex;
+    align-items: center;
     gap: 8px;
+    cursor: pointer;
+}
+
+/* Стилі для кнопок навігації на мобільних пристроях */
+
+@media  screen and (max-width: 767px) {
+    .about-nav-left,
+    .about-nav-right {
+        bottom: 16px;
+        top: 416px;
+        transform: none;
+    }
+    .about-nav-left {
+        left: 218px;
+    }
+    .about-nav-right {
+        right: 8px;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .container-home-feet {
+        max-width: 704px;
+        }
+    .about-card-text {
+        max-width: 548px;
+        padding-left: 32px;
+        padding-bottom: 32px;
+    }
+    .about-card {
+        max-width: 704px;
+        aspect-ratio: 704 / 404;
+    }
+    .about-slider-wrapper>.about-nav {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+    
+    .about-nav-left {
+        left: -24px;
+    }
+    
+    .about-nav-right {
+        right: -24px;
+    }
+    
+    .pagination {
+        justify-content: center;
+    }
+    .btn {
+        display: none;
+    }
+}
+
+
+@media screen and (min-width:1440px) {
+    .home-feet {
+        font-size: 48px;
+        text-align: center;
+        padding-top: 80px;
+    }
+    .container-home-feet {
+        max-width: 1312px;
+        max-height: 753px;
+    }
+    .about-card {
+        max-width: 1312px;
+        aspect-ratio: 1312 / 753;
+    }
+    .about-card-text {
+        font-size: 18px;
+        padding-left: 64px;
+        padding-bottom: 64px;
+    }
+    .btn {
+        display: none;
+    }
 }
