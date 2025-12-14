@@ -41,8 +41,7 @@
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.category-btn.current,
-.category-btn:active {
+.category-btn.current {
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0);
     border-radius: 100px;
@@ -61,7 +60,7 @@
     flex-direction: column;
     padding: 12px;
     width: 100%;
-    min-height: 520px;
+    min-height: 610px;
     background-color: #eee9e3;
     border-radius: 16px;
 }
@@ -137,11 +136,6 @@
     transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.pets-button:active {
-    box-shadow: inset 0 4px 6px -2px rgba(0, 0, 0, 0.03), inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
-background: #c3b49d;
-}
-
 .pets-load-more-btn {
     height: 45px;
     width: 100%;
@@ -152,11 +146,8 @@ background: #c3b49d;
     background-color: #88765c;
 }
 
-.pets-load-more-btn:active {
-    color: #02060a;
-    border: 1px solid #88765c;
-    box-shadow: inset 0 4px 6px -2px rgba(0, 0, 0, 0.03), inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
-    background-color: #eee9e3;    
+.pets-load-more-btn-hidden {
+    display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -168,7 +159,6 @@ background: #c3b49d;
 }
 
 .pets-item {
-    min-height: 530px;
     width: calc((100% - 32px) / 2);
 }
 
@@ -202,7 +192,7 @@ background: #c3b49d;
 }
 
 .category-list {
-   max-width: 100%; 
+    max-width: 100%; 
     margin-bottom: 40px;
 }
 
@@ -211,16 +201,15 @@ background: #c3b49d;
 }
 
 .category-btn.current,
-.category-btn:focus {
+.category-btn:focus-visible {
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0);
     border-radius: 100px;
     background-color: #eee9e3;
 }
 
-
 .pets-item {
-    min-height: 620px;
+    min-height: 700px;
     width: calc((100% - 64px) / 3);
 }
 
@@ -259,9 +248,9 @@ background: #c3b49d;
     font-size: 16px;
 }
 
-.pets-button:focus {
+.pets-button:focus-visible {
     box-shadow: inset 0 4px 6px -2px rgba(0, 0, 0, 0.03), inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
-background: #c3b49d;
+    background: #c3b49d;
 }
 
 .pets-load-more-btn {
@@ -270,10 +259,55 @@ background: #c3b49d;
     font-size: 16px;
 }
 
-.pets-load-more-btn:focus {
+.pets-load-more-btn:focus-visible {
     color: #02060a;
     border: 1px solid #88765c;
     box-shadow: inset 0 4px 6px -2px rgba(0, 0, 0, 0.03), inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
     background-color: #eee9e3;    
 }
+}
+
+/* --------------- loader --------------- */
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  background: linear-gradient(
+    0deg,
+    rgba(136, 118, 92, 0.2) 33%,
+    #88765c 100%
+  );
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #f5f0eb;
+}
+
+@keyframes rotation {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.loader-hidden {
+  display: none;
 }
