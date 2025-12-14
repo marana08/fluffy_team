@@ -13,23 +13,15 @@
     max-width: 335px;
 }
 
-.about-slider {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 60px;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-}
-
 .about-slider-wrapper {
     position: relative;
+    width: 100%;
 }
 
 .about-card {
     position: relative;
-    overflow: auto;
-    flex-shrink: 0;
+    overflow: hidden;
+    width: 100%;
 }
 
 .about-card img {
@@ -104,14 +96,33 @@
     .about-nav-left,
     .about-nav-right {
         bottom: 16px;
-        top: 416px;
+        top: auto;
         transform: none;
     }
     .about-nav-left {
-        left: 218px;
+        right: 72px;
     }
     .about-nav-right {
-        right: 8px;
+        right: 16px;
+    }
+    .pagination {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        padding-top: 16px;
+        padding-bottom: 40px;
+    }
+    .pagination-dots {
+        display: flex;
+        gap: 8px;
+        cursor: pointer;
+    }
+    .swiper-pagination {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-start;
+        cursor: pointer;
     }
 }
 
@@ -125,7 +136,7 @@
         padding-bottom: 32px;
     }
     .about-card {
-        max-width: 704px;
+        width: 100%;
         aspect-ratio: 704 / 404;
     }
     .about-slider-wrapper>.about-nav {
@@ -138,6 +149,8 @@
     
     .about-nav-left {
         left: -24px;
+        top: 50%;
+        transform: translateY(-50%);
     }
     
     .about-nav-right {
@@ -145,7 +158,15 @@
     }
     
     .pagination {
+        display: flex;
         justify-content: center;
+        padding-top: 24px;
+        padding-bottom: 64px;
+    }
+    .pagination-dots {
+        display: flex;
+        gap: 8px;
+        cursor: pointer;
     }
     .btn {
         display: none;
@@ -164,7 +185,7 @@
         max-height: 753px;
     }
     .about-card {
-        max-width: 1312px;
+        width: 100%;
         aspect-ratio: 1312 / 753;
     }
     .about-card-text {

@@ -1,17 +1,17 @@
-<!-- Секція "Чому Хатинка Лапок" -->
 <section id="about">
     <div class="container container-home-feet">
         <h2 class="home-feet">Чому Хатинка Лапок</h2>
 
-        <div class="about-slider-wrapper">
-            <button class="about-nav about-nav-left" type="button">
+        <div class="about-slider-wrapper swiper">
+            <button class="about-nav about-nav-left swiper-button-prev" type="button"
+                aria-label="Закрити модальне вікно">
                 <svg width="16" height="16">
                     <use href="img/sprite.svg#icon-left"></use>
                 </svg>
             </button>
 
-            <div class="about-slider">
-                <article class="about-card">
+            <div class="about-slider swiper-wrapper">
+                <article class="about-card swiper-slide">
                     <picture>
                         <source media="(min-width: 1440px)"
                             srcset="/img/about-us-section/desctop-version/item-min.jpg 1x, /img/about-us-section/desctop-version/item@2x-min.jpg 2x" />
@@ -30,7 +30,7 @@
                     </div>
                 </article>
 
-                <article class="about-card">
+                <article class="about-card swiper-slide">
                     <picture>
                         <source media="(min-width: 1440px)"
                             srcset="/img/about-us-section/desctop-version/desctop-2-min.jpg 1x, /img/about-us-section/desctop-version/desctop-2@2x-min.jpg 2x" />
@@ -49,7 +49,7 @@
                     </div>
                 </article>
 
-                <article class="about-card">
+                <article class="about-card swiper-slide">
                     <picture>
                         <source media="(min-width: 1440px)"
                             srcset="/img/about-us-section/desctop-version/destop-3-min.jpg 1x, /img/about-us-section/desctop-version/destop-3@2x-min.jpg 2x" />
@@ -68,7 +68,7 @@
                     </div>
                 </article>
 
-                <article class="about-card">
+                <article class="about-card swiper-slide">
                     <picture>
                         <source media="(min-width: 1440px)"
                             srcset="/img/about-us-section/desctop-version/desctop-4-min.jpg 1x, /img/about-us-section/desctop-version/desctop-4@2x-min.jpg 2x" />
@@ -87,7 +87,7 @@
                     </div>
                 </article>
 
-                <article class="about-card">
+                <article class="about-card swiper-slide">
                     <picture>
                         <source media="(min-width: 1440px)"
                             srcset="/img/about-us-section/desctop-version/desctop-5-min.jpg 1x, /img/about-us-section/desctop-version/desctop-5@2x-min.jpg 2x" />
@@ -107,14 +107,15 @@
                 </article>
             </div>
 
-            <button class="about-nav about-nav-right" type="button">
+            <button class="about-nav about-nav-right swiper-button-next" type="button"
+                aria-label="Закрити модальне вікно">
                 <svg width="16" height="16">
                     <use href="img/sprite.svg#icon-right"></use>
                 </svg>
             </button>
         </div>
 
-        <div class="pagination">
+        <div class="pagination swiper-pagination">
             <div class="pagination-dots">
                 <span class="dot"><svg width="8" height="8">
                         <use href="img/sprite.svg#icon-dot-2"></use>
@@ -133,7 +134,5 @@
                     </svg></span>
             </div>
         </div>
-    </div>
-
     </div>
 </section>
