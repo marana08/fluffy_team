@@ -1,0 +1,129 @@
+.faq-container {
+  padding: 64px 20px;
+}
+.faq-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #02060a;
+  margin-bottom: 40px;
+}
+.faq-item {
+  border: 0px solid #02060a;
+  border-radius: 8px;
+  background-color: #eee9e3;
+}
+.faq-question {
+  padding: 20px 24px;
+}
+.faq-item:not(:last-child) {
+  margin-bottom: 16px;
+}
+.faq-question-btn {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.faq-question-btn-title {
+  width: 239px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+  color: #02060a;
+}
+.faq-question-open {
+  width: 24px;
+  height: 24px;
+}
+.faq-answer {
+  padding: 0px 24px 24px 24px;
+}
+.faq-answer-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+  color: #02060a;
+}
+.faq-answer-text:not(:last-child) {
+  margin-bottom: 14px;
+}
+ul.faq-answer-text {
+  list-style-type: disc;
+  padding-left: 24px;
+}
+ul.faq-answer-text li:not(:last-child) {
+  margin-bottom: 14px;
+}
+ol.faq-answer-text {
+  padding-left: 24px;
+}
+ol.faq-answer-text li:not(:last-child) {
+  margin-bottom: 14px;
+}
+
+.ac.js-enabled .ac-panel {
+  visibility: hidden;
+  opacity: 0;
+}
+.ac.is-active .ac-panel {
+  visibility: visible;
+  opacity: 1;
+}
+.ac-panel {
+  transition: height 0.3s ease, opacity 0.02s ease;
+}
+
+@media screen and (min-width: 768px) {
+  .faq-container {
+    padding: 64px 32px;
+  }
+  .faq-title {
+    margin-bottom: 80px;
+  }
+  .faq-question {
+    padding: 20px 24px;
+  }
+  .faq-question-btn-title {
+    width: 608px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .faq-container {
+    padding: 80px 64px;
+  }
+  .faq-title {
+    font-size: 48px;
+    margin-bottom: 80px;
+  }
+  .faq-item {
+    width: 864px;
+    margin: 0 auto;
+  }
+  .faq-question-btn-title {
+    width: 768px;
+    font-size: 18px;
+  }
+
+  .faq-answer-text {
+    font-size: 16px;
+  }
+  .faq-answer-text:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  ul.faq-answer-text li:not(:last-child) {
+    margin-bottom: 16px;
+  }
+  ol.faq-answer-text li:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
