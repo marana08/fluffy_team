@@ -10,7 +10,7 @@
 }
 
 .container-home-feet {
-    max-width: 335px;
+    max-width: 100%;
 }
 
 .about-slider-wrapper {
@@ -22,6 +22,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
+    height: 100%;
 }
 
 .about-card img {
@@ -35,21 +36,37 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top,
-            rgba(0, 0, 0, 0.8),
-            rgba(0, 0, 0, 0.2));
-}
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2));
+} 
 
 .about-card-text {
     position: absolute;
+    max-width: 295px;
     bottom: 0;
-    z-index: 2;
     padding: 20px;
     color: #f4f6f1;
     font-size: 16px;
-    line-height: 1.5;
-    font-weight: 400;
-    max-width: 90%;
+}
+
+.swiper-slide {
+    position: relative;
+}
+
+.swiper-pagination {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: black
+}
+
+.swiper-pagination .dot {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
 }
 
 .pagination {
@@ -69,23 +86,20 @@
     cursor: pointer;
 }
 
-/* Для мобільної версії (кнопки знизу) */
+.btn {
+    display: flex;
+    position: relative;
+    top: 50%;
+    z-index: 10;
+    border: none;
+    max-width: 15px;
+    padding: 10px;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 767px) {
-    .about-nav-left,
-    .about-nav-right {
-        bottom: 16px;
-        top: auto;
-        transform: none;
-    }
-
-    .about-nav-left {
-        right: 72px;
-    }
-
-    .about-nav-right {
-        right: 16px;
-    }
     .pagination {
+        position: relative;
         justify-content: flex-start;
         gap: 8px;
     }
@@ -94,29 +108,23 @@
 @media screen and (min-width: 768px) {
     .container-home-feet {
         max-width: 704px;
-        }
+    }
+
     .about-card-text {
         max-width: 548px;
         padding-left: 32px;
         padding-bottom: 32px;
     }
+
     .about-card {
         width: 100%;
         aspect-ratio: 704 / 404;
     }
 
-    .about-nav-left {
-        left: -24px;
-    }
-    
-    .about-nav-right {
-        right: -24px;
-    }
     .pagination {
         justify-content: center;
     }
 }
-
 
 @media screen and (min-width: 1440px) {
     .home-feet {
@@ -124,19 +132,22 @@
         text-align: center;
         padding-top: 80px;
     }
+
     .container-home-feet {
         max-width: 1312px;
-        max-height: 753px;
     }
+
     .about-card {
         width: 100%;
         aspect-ratio: 1312 / 753;
     }
+
     .about-card-text {
         font-size: 18px;
         padding-left: 64px;
         padding-bottom: 64px;
     }
+
     .pagination {
         display: flex;
         justify-content: center;
