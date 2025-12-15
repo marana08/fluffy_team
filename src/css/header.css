@@ -9,12 +9,19 @@ html {
     justify-content: space-between;
 }
 
+.header-nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
 .header-logo {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     flex-direction: row;
     gap: 8px;
+    fill: #332C22;
 }
 
 
@@ -31,7 +38,16 @@ html {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    color: var(--color-scheme-1-text);
+    color: #02060A;
+}
+
+.header-navigation-item:hover {
+    border-bottom: 1px solid #443B2E;
+}
+
+.header-navigation-item:focus {
+    color: #88765C;
+    border-bottom: 1px solid #88765C;
 }
 
 .header-button {
@@ -52,7 +68,7 @@ html {
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
-    color: var(--color-scheme-1-text);
+    color: #02060A;
 }
 
 .header-button:active {
@@ -126,7 +142,6 @@ html {
     font-weight: 400;
     font-size: 14px;
     line-height: 1.5;
-    color: var(--color-scheme-1-text);
 }
 
 .modal-button {
@@ -180,7 +195,6 @@ html {
         font-weight: 400;
         font-size: 16px;
         line-height: 1.5;
-        color: var(--color-scheme-1-text);
     }
 
 
