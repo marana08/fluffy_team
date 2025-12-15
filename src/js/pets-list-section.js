@@ -265,7 +265,7 @@ function renderPagination() {
   let markup = '';
 
   markup += `<li>
-      <button class="pagination-btn-arrow" data-action="prev" ${page === 1 ? 'disabled' : ''}>
+      <button class="pagination-btn-arrow" data-action="prev aria-label="Попередня сторінка"" ${page === 1 ? 'disabled' : ''}>
         <svg class="arrow-icon" width="24" height="24">
           <use href="../img/sprite.svg#icon-arrow-back"></use>
         </svg>
@@ -303,7 +303,7 @@ function renderPagination() {
   }
 
   markup += `<li>
-      <button class="pagination-btn-arrow" data-action="next" ${page === totalPages ? 'disabled' : ''}>
+      <button class="pagination-btn-arrow" data-action="next" aria-label="Наступна сторінка" ${page === totalPages ? 'disabled' : ''}>
         <svg class="arrow-icon" width="24" height="24">
           <use href="../img/sprite.svg#icon-arrow-forward"></use>
         </svg>
@@ -318,6 +318,7 @@ function pageButton(pageNumber) {
     <li>
       <button
         class="pagination-btn ${page === pageNumber ? 'current' : ''}"
+        aria-label="Сторінка ${pageNumber}"
         data-page="${pageNumber}">
         ${pageNumber}
       </button>
