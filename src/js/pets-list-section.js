@@ -284,7 +284,7 @@ function renderPagination() {
   markup += `<li>
       <button class="pagination-btn-arrow" data-action="prev aria-label="Попередня сторінка"" ${page === 1 ? 'disabled' : ''}>
         <svg class="arrow-icon" width="24" height="24">
-          <use href="../img/sprite.svg#icon-arrow-back"></use>
+          <use href="/img/sprite.svg#icon-arrow-back"></use>
         </svg>
       </button>
     </li>`;
@@ -322,7 +322,7 @@ function renderPagination() {
   markup += `<li>
       <button class="pagination-btn-arrow" data-action="next" aria-label="Наступна сторінка" ${page === totalPages ? 'disabled' : ''}>
         <svg class="arrow-icon" width="24" height="24">
-          <use href="../img/sprite.svg#icon-arrow-forward"></use>
+          <use href="/img/sprite.svg#icon-arrow-forward"></use>
         </svg>
       </button>
     </li>`;
