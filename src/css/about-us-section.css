@@ -52,26 +52,6 @@
     max-width: 90%;
 }
 
-.about-nav {
-    display: flex;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #c3b49d;
-    border-radius: 8px;
-    width: 48px;
-    height: 48px;
-    background: #eee9e3;
-    cursor: pointer;
-}
-
-.about-slider-wrapper>.about-nav { /* прибирає кнопки на мобільних */
-    display: flex;
-}
-
 .pagination {
     display: flex;
     justify-content: space-between;
@@ -85,48 +65,33 @@
 
 .pagination-dots {
     display: flex;
-    align-items: center;
     gap: 8px;
     cursor: pointer;
 }
 
-/* Стилі для кнопок навігації на мобільних пристроях */
-
-@media  screen and (max-width: 767px) {
+/* Для мобільної версії (кнопки знизу) */
+@media screen and (max-width: 767px) {
     .about-nav-left,
     .about-nav-right {
         bottom: 16px;
         top: auto;
         transform: none;
     }
+
     .about-nav-left {
         right: 72px;
     }
+
     .about-nav-right {
         right: 16px;
     }
     .pagination {
-        display: flex;
         justify-content: flex-start;
-        align-items: center;
-        width: 100%;
-        padding-top: 16px;
-        padding-bottom: 40px;
-    }
-    .pagination-dots {
-        display: flex;
         gap: 8px;
-        cursor: pointer;
-    }
-    .swiper-pagination {
-        display: flex;
-        gap: 8px;
-        justify-content: flex-start;
-        cursor: pointer;
     }
 }
 
-@media screen and (min-width:768px) {
+@media screen and (min-width: 768px) {
     .container-home-feet {
         max-width: 704px;
         }
@@ -139,42 +104,21 @@
         width: 100%;
         aspect-ratio: 704 / 404;
     }
-    .about-slider-wrapper>.about-nav {
-        display: flex;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 10;
-    }
-    
+
     .about-nav-left {
         left: -24px;
-        top: 50%;
-        transform: translateY(-50%);
     }
     
     .about-nav-right {
         right: -24px;
     }
-    
     .pagination {
-        display: flex;
         justify-content: center;
-        padding-top: 24px;
-        padding-bottom: 64px;
-    }
-    .pagination-dots {
-        display: flex;
-        gap: 8px;
-        cursor: pointer;
-    }
-    .btn {
-        display: none;
     }
 }
 
 
-@media screen and (min-width:1440px) {
+@media screen and (min-width: 1440px) {
     .home-feet {
         font-size: 48px;
         text-align: center;
@@ -193,7 +137,10 @@
         padding-left: 64px;
         padding-bottom: 64px;
     }
-    .btn {
-        display: none;
+    .pagination {
+        display: flex;
+        justify-content: center;
+        padding-top: 24px;
+        padding-bottom: 64px;
     }
 }
