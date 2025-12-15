@@ -8,6 +8,7 @@ import './js/success-stories-section.js';
 import './js/animal-details-modal.js';
 import './js/order-modal.js';
 import './js/footer.js';
+import './js/server-api.js'
 
 // бібліотеки
 import axios from 'axios';
