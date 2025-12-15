@@ -2,11 +2,12 @@ import axios from "axios";
 import iziToast from "izitoast";
 import { ENDPOINTS, server } from "./server-api";
 import { refs } from "./refs";
+import { loadFromLS, saveToLS } from "./storage";
 
 let limit = getLimitByScreen();
-let page = 1;
+let page = loadFromLS('page') || 1;
 let totalItems;
-let categoryId;
+let categoryId = loadFromLS('categoryId') ?? null;
 
 document.addEventListener('DOMContentLoaded', handleContentLoad);
 refs.petsLoadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
@@ -33,13 +34,23 @@ async function handleContentLoad(e) {
     showLoader();
     
     try {
-        const categories = await fetchAllCategories();
-        const animals = await fetchAllAnimals();   
-        
-        renderCategories(categories);
-        renderAnimals(animals);
-        renderPagination();
-        checkLoadMoreBtnStatus();
+        if (!categoryId) {
+            const categories = await fetchAllCategories();
+            const animals = await fetchAllAnimals();   
+            
+            renderCategories(categories);
+            renderAnimals(animals);
+            renderPagination();
+            checkLoadMoreBtnStatus();
+
+        } else {
+            const categories = await fetchAllCategories();
+            const animals = await fetchCategoryById(categoryId, page);
+            renderCategories(categories);
+            renderAnimals(animals);
+            renderPagination();
+            checkLoadMoreBtnStatus();
+    }
     } catch (error) {
        iziToast.error({
             title: 'Помилка',
@@ -82,6 +93,8 @@ async function handleCategoryBtnClick(e) {
         })
     } finally {
         hideLoader();
+        saveToLS('categoryId', categoryId);
+        saveToLS('page', page);
     }
 }
 
@@ -120,7 +133,8 @@ async function handleLoadMoreBtnClick() {
             position: 'topRight',
         })
     } finally {
-        hideLoader(); 
+        hideLoader();
+        saveToLS('page', page);
         refs.loader.classList.remove('loader-center');
     }  
 }
@@ -156,7 +170,7 @@ async function handlePaginationClick(e) {
         renderAnimals(animals);
         renderPagination();
         window.scrollTo({
-            top: refs.petsList.offsetTop - 80,
+            top: refs.petsList.offsetTop - 160,
             behavior: 'smooth',
         });
 
@@ -168,6 +182,7 @@ async function handlePaginationClick(e) {
             })
         } finally {
             hideLoader();
+            saveToLS('page', page);
         }
 }
 
@@ -207,9 +222,10 @@ async function fetchCategoryById(id, page) {
 // ----------------- render -----------------
 
 function categoryTemplate(category) {
+    const isActive = category._id === categoryId;
     return `
      <li class="category-item" data-id="${category._id}">
-        <button class="category-btn" type="button">${category.name}</button>
+        <button class="category-btn ${isActive ? 'current' : ''}" type="button">${category.name}</button>
       </li>`
 }
 
@@ -218,8 +234,9 @@ function categoriesTemplate(categories) {
 }
 
 function renderCategories(categories) {
+    const isAllActive = !categoryId;
     const markup =` <li class="category-item">
-        <button class="category-btn current" type="button">Всі</button>
+        <button class="category-btn ${isAllActive ? 'current' : ''}" type="button">Всі</button>
       </li>${categoriesTemplate(categories)}`;
 
     refs.categoryList.innerHTML = markup;  
@@ -232,7 +249,7 @@ function animalTemplate({ _id, name, image, species, age, gender, categories, de
     
     return `
      <li class="pets-item" data-id="${_id}">
-        <img class="pets-img" src="${image}" alt="${name} - ${species}" />
+     <div class="pets-img-wrapper"><img class="pets-img" src="${image}" alt="${name} - ${species}" /></div>
         <div class="pets-list-wrapper">
           <p class="pets-category">${species}</p>
           <h3 class="pets-name">${name}</h3>

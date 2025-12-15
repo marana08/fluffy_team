@@ -71,14 +71,16 @@
     flex-direction: column;
     padding: 12px;
     width: 100%;
-    min-height: 610px;
+    min-height: 550px;
     background-color: #eee9e3;
     border-radius: 16px;
 }
 
-.pets-img {
+.pets-img-wrapper {
     border-radius: 8px;
     margin-bottom: 16px;
+    max-height: 245px;
+    overflow: hidden;
 }
 
 .pets-list-wrapper {
@@ -189,6 +191,10 @@
     width: calc((100% - 32px) / 2);
 }
 
+.pets-img-wrapper {
+    max-height: 246px;
+}
+
 .pets-button:hover {
     background-color: #c3b49d;
 }
@@ -278,8 +284,12 @@ button:disabled.pagination-btn-arrow {
 }
 
 .pets-item {
-    min-height: 700px;
+    min-height: 650px;
     width: calc((100% - 64px) / 3);
+}
+
+.pets-img-wrapper {
+    max-height: 309px;
 }
 
 .pets-list-wrapper {
