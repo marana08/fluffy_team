@@ -11,6 +11,8 @@ let categoryId;
 document.addEventListener('DOMContentLoaded', handleContentLoad);
 refs.petsLoadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
 refs.categoryList.addEventListener('click', handleCategoryBtnClick);
+refs.petsListPagination.addEventListener('click', handlePaginationClick);
+
 
 
 function getLimitByScreen() {
@@ -18,6 +20,10 @@ function getLimitByScreen() {
 
   if (width >= 1440) return 9;     
   return 8;                      
+}
+
+function getTotalPages() {
+  return Math.ceil(totalItems / limit);
 }
 
 
@@ -32,15 +38,18 @@ async function handleContentLoad(e) {
         
         renderCategories(categories);
         renderAnimals(animals);
-
+        renderPagination();
         checkLoadMoreBtnStatus();
     } catch (error) {
-       console.log(error);
+       iziToast.error({
+            title: 'Помилка',
+            message: 'Щось пішло не так',
+            position: 'topRight',
+        })
     } finally {
         hideLoader();
     }
 }
-
 
 async function handleCategoryBtnClick(e) {
     if (e.target.nodeName !== 'BUTTON') return;
@@ -64,13 +73,13 @@ async function handleCategoryBtnClick(e) {
         }
         renderAnimals(animals);    
         checkLoadMoreBtnStatus(); 
+        renderPagination();
     } catch (error) {
         iziToast.error({
             title: 'Помилка',
             message: 'Щось пішло не так',
             position: 'topRight',
         })
-        throw error;
     } finally {
         hideLoader();
     }
@@ -110,71 +119,87 @@ async function handleLoadMoreBtnClick() {
             message: 'Щось пішло не так',
             position: 'topRight',
         })
-        throw error;
     } finally {
         hideLoader(); 
         refs.loader.classList.remove('loader-center');
     }  
 }
 
+async function handlePaginationClick(e) {
+    const btn = e.target.closest('button');
+    if (!btn) return;
+
+    let animals;
+
+    const totalPages = getTotalPages();
+
+    if (btn.dataset.action === 'prev' && page > 1) {
+        page -= 1;
+    }
+
+    if (btn.dataset.action === 'next' && page < totalPages) {
+        page += 1;
+    }
+
+    if (btn.dataset.page) {
+        page = Number(btn.dataset.page);
+    }
+
+    showLoader();
+    try {
+        if (categoryId) {
+            animals = await fetchCategoryById(categoryId, page);
+        } else {
+         animals = await fetchAllAnimals(page);
+        }   
+
+        renderAnimals(animals);
+        renderPagination();
+        window.scrollTo({
+            top: refs.petsList.offsetTop - 80,
+            behavior: 'smooth',
+        });
+
+        } catch (error) {
+            iziToast.error({
+                title: 'Помилка',
+                message: 'Щось пішло не так',
+                position: 'topRight',
+            })
+        } finally {
+            hideLoader();
+        }
+}
+
 
 // ----------------- API -----------------
 
 async function fetchAllCategories(page) {
-    try {
     const response = await server.get(`${ENDPOINTS.categories}`);   
     return response.data;
-    } catch (error) {
-        iziToast.error({
-            title: 'Помилка',
-            message: 'Щось пішло не так',
-            position: 'topRight',
-        })
-        throw error;
-    }
 }
 
-async function fetchAllAnimals() {
-    try {
-        const response = await server.get(`${ENDPOINTS.animals}`, {
-            params: {
-                limit: limit,
-                page: page
-            }
-        });
+async function fetchAllAnimals(page) {
+    const response = await server.get(`${ENDPOINTS.animals}`, {
+        params: {
+            limit: limit,
+            page: page
+        }
+    });
 
-        totalItems = response.data.totalItems;
-        return response.data.animals; 
-        
-    } catch (error) {
-        iziToast.error({
-            title: 'Помилка',
-            message: 'Щось пішло не так',
-            position: 'topRight',
-        })
-        throw error;
-    }   
+    totalItems = response.data.totalItems;
+    return response.data.animals; 
 }
 
 async function fetchCategoryById(id, page) {
-    try {
-        const response = await server.get(`${ENDPOINTS.animals}?categoryId=${id}`, {
-            params: {
-            limit: limit,
-            page: page
-            }
-        });
-        totalItems = response.data.totalItems;
-        return response.data.animals;
-        
-    } catch (error) {
-            iziToast.error({
-            title: 'Помилка',
-            message: 'Щось пішло не так',
-            position: 'topRight',
-        })
-        throw error;
-    }
+    const response = await server.get(`${ENDPOINTS.animals}?categoryId=${id}`, {
+        params: {
+        limit: limit,
+        page: page
+        }
+    });
+    totalItems = response.data.totalItems;
+    return response.data.animals;
 }
 
 
@@ -233,6 +258,74 @@ function renderAnimals(animals) {
     refs.petsList.innerHTML = markup;
 }
 
+function renderPagination() {
+  const totalPages = getTotalPages();
+  if (totalPages <= 1) return;
+
+  let markup = '';
+
+  markup += `<li>
+      <button class="pagination-btn-arrow" data-action="prev aria-label="Попередня сторінка"" ${page === 1 ? 'disabled' : ''}>
+        <svg class="arrow-icon" width="24" height="24">
+          <use href="../img/sprite.svg#icon-arrow-back"></use>
+        </svg>
+      </button>
+    </li>`;
+
+  if (page === 1) {
+    for (let i = 1; i <= Math.min(3, totalPages); i += 1) {
+      markup += pageButton(i);
+    }
+      if (totalPages > 3) {
+      markup += `<li class="dots">…</li>`;
+      markup += pageButton(totalPages);
+    }
+  } else {
+      markup += pageButton(1);
+
+    if (page > 3) {
+      markup += `<li class="dots">…</li>`;
+    }
+
+    for (let i = page - 1; i <= page + 1; i += 1) {
+      if (i > 1 && i < totalPages) {
+        markup += pageButton(i);
+      }
+    }
+
+    if (page < totalPages - 2) {
+      markup += `<li class="dots">…</li>`;
+    }
+
+    if (totalPages > 1) {
+      markup += pageButton(totalPages);
+    }
+  }
+
+  markup += `<li>
+      <button class="pagination-btn-arrow" data-action="next" aria-label="Наступна сторінка" ${page === totalPages ? 'disabled' : ''}>
+        <svg class="arrow-icon" width="24" height="24">
+          <use href="../img/sprite.svg#icon-arrow-forward"></use>
+        </svg>
+      </button>
+    </li>`;
+
+  refs.petsListPagination.innerHTML = markup;
+}
+
+function pageButton(pageNumber) {
+  return `
+    <li>
+      <button
+        class="pagination-btn ${page === pageNumber ? 'current' : ''}"
+        aria-label="Сторінка ${pageNumber}"
+        data-page="${pageNumber}">
+        ${pageNumber}
+      </button>
+    </li>
+  `;
+}
+
 // --------------- loader ---------------
 
 function showLoader() {
@@ -255,7 +348,7 @@ function hideLoadBtn() {
 }
 
 function checkLoadMoreBtnStatus() {
-    const totalPages = Math.ceil(totalItems / limit);
+    const totalPages = getTotalPages();
       if (page >= totalPages) {
         hideLoadBtn();
     } else {
