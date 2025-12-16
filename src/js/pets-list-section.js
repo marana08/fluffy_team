@@ -20,18 +20,14 @@ refs.petsListPagination.addEventListener('click', handlePaginationClick);
 
 function getLimitByScreen() {
   const width = window.innerWidth;
-
-  if (width >= 1440) return 9;     
-  return 8;                      
+  if (width >= 1440) return 9;
+  return 8;
 }
-
 function getTotalPages() {
   return Math.ceil(totalItems / limit);
 }
 
-
 // --------------- handlers -------------------
-
 async function handleContentLoad(e) {
   showLoader();
   
@@ -102,14 +98,10 @@ async function handleCategoryBtnClick(e) {
       saveToLS('page', page);
   }
 }
-
-
 async function handleLoadMoreBtnClick() {
     page += 1;
-
     refs.loader.classList.add('loader-center');
     showLoader();
-
     try {
         if (!categoryId) {
             checkLoadMoreBtnStatus();
@@ -122,12 +114,11 @@ async function handleLoadMoreBtnClick() {
             const markup = animalsTemplate(animals);
             refs.petsList.insertAdjacentHTML('beforeend', markup);
         }
-
         const firstCard = refs.petsList.querySelector('li');
         if (firstCard) {
             const cardRect = firstCard.getBoundingClientRect();
             window.scrollBy({
-                top: cardRect.height, 
+                top: cardRect.height,
                 behavior: 'smooth',
             });
         }
@@ -221,11 +212,7 @@ async function fetchCategoryById(id, page) {
     totalItems = response.data.totalItems;
     return response.data.animals;
 }
-
-
-
 // ----------------- render -----------------
-
 function categoryTemplate(category) {
     const isActive = category._id === categoryId;
     return `
@@ -233,25 +220,20 @@ function categoryTemplate(category) {
         <button class="category-btn ${isActive ? 'current' : ''}" type="button">${category.name}</button>
       </li>`
 }
-
 function categoriesTemplate(categories) {
     return categories.reverse().map(categoryTemplate).join('');
 }
-
 function renderCategories(categories) {
     const isAllActive = !categoryId;
     const markup =` <li class="category-item">
         <button class="category-btn ${isAllActive ? 'current' : ''}" type="button">Всі</button>
       </li>${categoriesTemplate(categories)}`;
-
-    refs.categoryList.innerHTML = markup;  
+    refs.categoryList.innerHTML = markup;
 }
-
 function animalTemplate({ _id, name, image, species, age, gender, categories, description }) {
     const categoriesMarkup = categories
         .map(category => `<li class="pets-category-item">${category.name}</li>`)
         .join('');
-    
     return `
      <li class="pets-item" data-id="${_id}">
      <div class="pets-img-wrapper"><img class="pets-img" src="${image}" alt="${name} - ${species}" /></div>
@@ -270,11 +252,9 @@ function animalTemplate({ _id, name, image, species, age, gender, categories, de
         </div>
       </li>`
 }
-
 function animalsTemplate(animals) {
     return animals.map(animalTemplate).join('');
 }
-
 function renderAnimals(animals) {
     const markup = animalsTemplate(animals);
     refs.petsList.innerHTML = markup;
@@ -349,26 +329,19 @@ function pageButton(pageNumber) {
 }
 
 // --------------- loader ---------------
-
 function showLoader() {
     refs.loader.classList.remove('loader-hidden');
 }
-
 function hideLoader() {
     refs.loader.classList.add('loader-hidden');
 }
-
-
 // --------------- load more btn ---------------
-
 function showLoadBtn() {
     refs.petsLoadMoreBtn.classList.remove('pets-load-more-btn-hidden')
 }
-
 function hideLoadBtn() {
     refs.petsLoadMoreBtn.classList.add('pets-load-more-btn-hidden')
 }
-
 function checkLoadMoreBtnStatus() {
     const totalPages = getTotalPages();
       if (page >= totalPages) {
