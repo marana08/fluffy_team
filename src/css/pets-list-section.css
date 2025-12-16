@@ -52,7 +52,9 @@
     background-color: #eee9e3;
 }
 
-.category-btn.current {
+.category-btn.current,
+.category-btn:hover,
+.category-btn:focus-visible {
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0);
     border-radius: 100px;
@@ -154,6 +156,11 @@
     background: #c3b49d;
 }
 
+.pets-button:hover,
+.pets-button:focus-visible {
+    background-color: #c3b49d;
+}
+
 .pets-load-more-btn {
     height: 45px;
     width: 100%;
@@ -162,6 +169,7 @@
     border: 1px solid #88765c;
     border-radius: 8px;
     background-color: #88765c;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pets-load-more-btn-hidden {
@@ -175,16 +183,16 @@
     color: #02060a;
 }
 
+.pets-load-more-btn:hover,
+.pets-load-more-btn:focus {
+    color: #02060a;
+    border: 1px solid #88765c;
+    background-color: #eee9e3;
+}
+
 @media screen and (min-width: 768px) {
 .pets-load-more-btn{
     display: none;
-}
-
-.category-btn:hover {
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0);
-    border-radius: 100px;
-    background-color: #eee9e3;
 }
 
 .pets-item {
@@ -193,10 +201,6 @@
 
 .pets-img-wrapper {
     max-height: 246px;
-}
-
-.pets-button:hover {
-    background-color: #c3b49d;
 }
 
 .pagination {
@@ -240,11 +244,13 @@
 }
 
 .pagination-btn.current,
-.pagination-btn:hover {
+.pagination-btn:hover,
+.pagination-btn:focus  {
     border: 1px solid #b3b4b5;
 }
 
-.pagination-btn-arrow:hover {
+.pagination-btn-arrow:hover,
+.pagination-btn-arrow:focus-visible {
     border: 1px solid rgba(2, 6, 10, 0.6);
     background-color: #eee9e3;
 }
@@ -253,8 +259,7 @@ button:disabled.pagination-btn-arrow {
     border: 1px solid #f6f4f1;
     background-color: #eee9e3;
     opacity: 0.4;
-}
-    
+} 
 }
 
 @media screen and (min-width: 1440px) {  
@@ -273,14 +278,6 @@ button:disabled.pagination-btn-arrow {
 
 .category-btn {
     font-size: 16px;
-}
-
-.category-btn.current,
-.category-btn:focus-visible {
-    font-weight: 500;
-    border: 1px solid rgba(255, 255, 255, 0);
-    border-radius: 100px;
-    background-color: #eee9e3;
 }
 
 .pets-item {
@@ -327,23 +324,10 @@ button:disabled.pagination-btn-arrow {
     font-size: 16px;
 }
 
-.pets-button:focus-visible {
-    background-color: #c3b49d;
-}
-
 .pagination-btn {
     width: 58px;
     height: 48px;
     font-size: 16px;
-}
-
-.pagination-btn:focus {
-    border: 1px solid #b3b4b5;
-}
-
-.pagination-btn-arrow:focus-visible {
-    border: 1px solid rgba(2, 6, 10, 0.6);
-    background-color: #eee9e3;
 }
 }
 
