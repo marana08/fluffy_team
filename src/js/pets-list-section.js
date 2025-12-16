@@ -34,25 +34,15 @@ function getTotalPages() {
 
 async function handleContentLoad(e) {
   showLoader();
-  
+  page = 1;
   try {
-      if (!categoryId) {
-          const categories = await fetchAllCategories();
-          const animals = await fetchAllAnimals();   
-          
-          renderCategories(categories);
-          renderAnimals(animals);
-          renderPagination();
-          checkLoadMoreBtnStatus();
-
-      } else {
-          const categories = await fetchAllCategories();
-          const animals = await fetchCategoryById(categoryId, page);
-          renderCategories(categories);
-          renderAnimals(animals);
-          renderPagination();
-          checkLoadMoreBtnStatus();
-  }
+      const categories = await fetchAllCategories();
+      const animals = await fetchAllAnimals();   
+      
+      renderCategories(categories);
+      renderAnimals(animals);
+      renderPagination();
+      checkLoadMoreBtnStatus();
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -227,21 +217,20 @@ async function fetchCategoryById(id, page) {
 // ----------------- render -----------------
 
 function categoryTemplate(category) {
-    const isActive = category._id === categoryId;
     return `
      <li class="category-item" data-id="${category._id}">
-        <button class="category-btn ${isActive ? 'current' : ''}" type="button">${category.name}</button>
+        <button class="category-btn" type="button">${category.name}</button>
       </li>`
 }
 
 function categoriesTemplate(categories) {
-    return categories.reverse().map(categoryTemplate).join('');
+    return categories.map(categoryTemplate).join('');
 }
 
 function renderCategories(categories) {
     const isAllActive = !categoryId;
     const markup =` <li class="category-item">
-        <button class="category-btn ${isAllActive ? 'current' : ''}" type="button">Всі</button>
+        <button class="category-btn current" type="button">Всі</button>
       </li>${categoriesTemplate(categories)}`;
 
     refs.categoryList.innerHTML = markup;  
