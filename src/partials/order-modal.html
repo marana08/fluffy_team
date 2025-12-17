@@ -2,7 +2,7 @@
 <section id="modal-order" class="modal-order">
   <div class="container">
     <div class="modal-wrapper">
-      <div class="modal-close-btn">
+      <div class="modal-close-btn" aria-label="Закрити модальне вікно">
         <svg class="icon-close">
           <use xlink:href="img/sprite.svg#icon-close"></use>
         </svg>
@@ -41,7 +41,11 @@
           ></textarea>
           <p class="error-text"></p>
         </label>
-        <button class="modal-form-submit-btn" type="submit" class="btn-submit">
+        <button
+          class="modal-form-submit-btn"
+          type="submit"
+          aria-label="Відправити заявку на знайомство"
+        >
           Надіслати
         </button>
       </form>
