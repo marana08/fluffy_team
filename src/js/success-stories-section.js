@@ -1,6 +1,6 @@
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
-import { getStories } from './success-stories-api';
+import { getStories } from './server-api';
 import { renderStories } from './success-stories-rndr';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -36,6 +36,7 @@ function showControls() {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  showLoader();
   try {
     let storiesList = await getStories();
 
