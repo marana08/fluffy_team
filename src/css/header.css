@@ -1,11 +1,15 @@
-html {
-    scroll-behavior: smooth;
-}
-
 .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 64px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: #f6f4f1;
 }
 
 .header-nav-logo {
@@ -38,6 +42,10 @@ html {
     font-size: 16px;
     line-height: 1.5;
     color: #02060A;
+}
+
+.header-navigation-link {
+    padding: 22px 0;
 }
 
 .header-button {
@@ -83,10 +91,6 @@ html {
     margin: 8px 0;
 }
 
-.header-navigation-item {
-    padding: 22px 0;
-}
-
 .header-navigation-link,
 .modal-navigation-link {
     position: relative;
@@ -98,7 +102,7 @@ html {
     content: '';
     position: absolute;
     left: 0;
-    bottom: -2px;
+    bottom: 20px;
     width: 100%;
     height: 1px;
     background-color: currentColor;
@@ -222,6 +226,14 @@ html {
         border: 1px solid #88765C;
         border-radius: 8px;
         padding: 8px 20px;
+    }
+
+    header {
+        position: static;
+    }
+
+    .header {
+        height: 72px;
     }
 
     .header-button:hover {
