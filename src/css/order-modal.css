@@ -57,6 +57,7 @@ body.modal-open {
   background-color: #fff;
   padding-left: 20px;
   padding-right: 20px;
+  border-radius: 8px;
 }
 
 .icon-close {
@@ -138,6 +139,12 @@ body.modal-open {
 }
 
 @media only screen and (min-width: 768px) {
+  .modal-wrapper{
+    width: 704px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
   .modal-title {
     font-size: 36px;
   }
@@ -150,6 +157,12 @@ body.modal-open {
 }
 
 @media only screen and (min-width: 1440px) {
+  .modal-wrapper {
+      width: 768px;
+      padding-left: 64px;
+      padding-right: 64px;
+    }
+
   .modal-title {
     font-size: 48px;
     max-width: 640px;
