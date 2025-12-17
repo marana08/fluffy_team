@@ -1,0 +1,118 @@
+.faq-container {
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+.faq-title {
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 120%;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.faq-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.faq-item {
+  border: 0px solid #02060a;
+  border-radius: 8px;
+  background-color: #eee9e3;
+}
+.faq-question {
+  padding: 20px 24px;
+}
+.faq-question-btn {
+  width: 100%;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.faq-question-btn-title {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 150%;
+}
+.faq-question-btn-icon {
+  display: flex;
+  align-items: center;
+}
+.faq-question-icon-img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  flex-shrink: 0;
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  font-size: 14px;
+  line-height: 150%;
+  padding: 0px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.faq-answer ul {
+  list-style-type: disc;
+}
+.faq-answer ol,
+.faq-answer ul {
+  padding-left: 21px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ac-panel {
+  overflow: hidden;
+  transition: height 0.35s ease, opacity 0.2s ease 0.1s;
+}
+.ac.js-enabled .ac-panel {
+  opacity: 0;
+}
+.ac.is-active .ac-panel {
+  opacity: 1;
+}
+.ac.is-active .faq-question-icon-img {
+  transform: rotate(45deg);
+}
+
+@media screen and (min-width: 768px) {
+  .faq-title {
+    margin-bottom: 80px;
+  }
+  .faq-item-list {
+    gap: 16px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .faq-container {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .faq-title {
+    font-size: 48px;
+  }
+  .faq-item-list {
+    width: 864px;
+    margin: 0 auto;
+  }
+  .faq-question-btn-title {
+    font-size: 18px;
+  }
+  .faq-answer {
+    font-size: 16px;
+  }
+  .faq-answer ol,
+  .faq-answer ul {
+    gap: 16px;
+  }
+}
