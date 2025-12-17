@@ -224,7 +224,7 @@ function categoryTemplate(category) {
 }
 
 function categoriesTemplate(categories) {
-    return categories.map(categoryTemplate).join('');
+    return categories.reverse().map(categoryTemplate).join('');
 }
 
 function renderCategories(categories) {
