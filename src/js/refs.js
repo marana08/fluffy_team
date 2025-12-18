@@ -4,5 +4,5 @@ export const refs = {
     loader: document.querySelector('.js-loader'),
     petsLoadMoreBtn: document.querySelector('.js-pets-load-more-btn'),
     petsListPagination: document.querySelector('.pagination'),
-    animalDetailsBackdrop: document.querySelector('.animal-details-backdrop'),
 }
+
