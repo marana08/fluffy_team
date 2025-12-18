@@ -13,7 +13,7 @@ document.addEventListener("keydown", (event) => {
     const isEscape = event.key === "Escape";
     const isModalOpen = modal.classList.contains("is-open");
     if (isEscape && isModalOpen) {
-        modal.classList.remove("is-open");
+        clos
     }
 });
 
@@ -25,4 +25,8 @@ menuButton.addEventListener("click", (event) => {
 })
 
 closeButton.addEventListener("click", closeModal)
-nav.addEventListener("click", closeModal)
+nav.addEventListener("click", (event) => {
+    if (event.target.classList.contains("modal-navigation-link")) {
+        closeModal();
+    }
+})
