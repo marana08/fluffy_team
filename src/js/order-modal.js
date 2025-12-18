@@ -1,17 +1,36 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
-
+import { refs } from './refs';
 // Модальне вікно «Залишіть заявку»
+let animal;
 const formOrder = document.getElementById('order-form');
 const modalWindow = document.getElementById('modal-order');
 const closeModalOrderBtn = modalWindow.querySelector('.modal-close-btn');
-// Тут також потрібна кнопка відкриття модального вікна
-const openModalOrderBtn = null;
+window.addEventListener('open-order-modal', (e) => {
+  const id = e?.detail?.animalId;
+  if (!id) return;
+  animal = id;
+  // закриваємо детальну модалку (backdrop)
+  if (refs && refs.animalDetailsBackdrop) {
+    refs.animalDetailsBackdrop.classList.remove('is-open');
+  }
+  document.body.style.overflow = '';
+  modalWindow.classList.remove('visually-hidden');
+  document.body.classList.add('modal-open');
+  window.addEventListener('keydown', onEscapePress);
+});
 
 function openModalOrder() {
   modalWindow.classList.remove('visually-hidden');
   document.body.classList.add('modal-open');
   window.addEventListener('keydown', onEscapePress);
+}
+
+function closeModalAnimal() {
+  if (refs && refs.animalDetailsBackdrop) {
+    refs.animalDetailsBackdrop.classList.remove('is-open');
+  }
+  document.body.style.overflow = '';
 }
 
 function closeModalOrder() {
@@ -34,7 +53,6 @@ function onModalClick(event) {
 
 closeModalOrderBtn.addEventListener('click', closeModalOrder);
 modalWindow.addEventListener('click', onModalClick);
-// openModalOrderBtn.addEventListener('click', openModalOrder);
 
 formOrder.addEventListener('submit', async event => {
   event.preventDefault();
@@ -92,7 +110,7 @@ formOrder.addEventListener('submit', async event => {
   const formData = {
     name: name,
     phone: phone,
-    animalId: '667ad1b8e4b01a2b3c4d5e55', // Тут має бути реальний ID тварини
+    animalId: animal,
     comment: comments.length > 0 ? comments : 'Без коментарів',
   };
 
@@ -105,7 +123,6 @@ formOrder.addEventListener('submit', async event => {
     const orderData = response.data;
     Swal.fire({
       title: 'Дякуємо за вашу заявку!',
-      text: `Ваш номер замовлення: ${orderData._id}`,
       icon: 'success',
       confirmButtonText: 'Закрити',
     });

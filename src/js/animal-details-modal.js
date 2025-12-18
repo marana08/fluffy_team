@@ -2,13 +2,17 @@ import { refs } from "./refs";
 import spriteUrl from "../img/sprite.svg";
 
 refs.animalDetailsBackdrop.addEventListener('click', handleBackdropClick);
+let animalId = null;
 
+export function getAnimalId() {
+  return animalId;
+}
 
 export function handleOpenModal(e, allAnimals) {
   if (e.target.nodeName !== 'BUTTON') return;
     const card = e.target.closest('li');
-    const animalId = card.dataset.id;
-    const animal = allAnimals.find(animal => animal._id === animalId);
+    const id = card.dataset.id;
+    const animal = allAnimals.find(animal => animal._id === id);
   if (!animal) return;
     renderModal(animal);
     refs.animalDetailsBackdrop.classList.add('is-open');
@@ -16,9 +20,16 @@ export function handleOpenModal(e, allAnimals) {
     window.addEventListener('keydown', handleEscPress);
     const closeBtn = document.querySelector('.details-modal-close-btn');
     closeBtn.addEventListener('click', handleCloseModalBtn);
-  //ставимо клік на кнопку і передаємо id для модального вікна з формою
-    const adoptBtn = document.querySelector('.modal-adopt-btn');
-    adoptBtn.addEventListener('click', e => handleAdoptBtnClick(e, animal._id));
+  // поставимо клік на кнопку і передаємо id для модального вікна з формою
+  const adoptBtn = document.querySelector('.modal-adopt-btn');
+  // зберігаємо id у зовнішню змінну
+  animalId = animal._id;
+  if (adoptBtn) {
+    adoptBtn.addEventListener('click', () => {
+      // повідомляємо order-modal про відкриття з потрібним id
+      window.dispatchEvent(new CustomEvent('open-order-modal', { detail: { animalId: animal._id } }));
+    });
+  }
 }
 function renderModal({
   _id,
