@@ -1,0 +1,251 @@
+/* --- СТАНДАРТНІ СТИЛІ СЕКЦІЇ --- */
+#about {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.about-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: #02060a;
+}
+
+/* 
+.container-home-feet {
+  width: 100%; 
+  max-width: 100%;
+  margin: 0 auto;
+} */
+
+.about-swiper-parent {
+    position: relative;
+}
+
+.about-swiper {
+    position: relative;
+    overflow: visible;
+}
+
+/* !!! СЛАЙД !!! */
+.about-swiper-slide {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.about-swiper-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+            rgba(0, 0, 0, 0.18) 0%,
+            rgba(0, 0, 0, 0.63) 100%);
+    z-index: 1;
+}
+
+.about-card-text {
+    position: absolute;
+    max-width: 295px;
+    bottom: 0;
+    padding: 20px;
+    color: #f4f6f1;
+    font-size: 16px;
+    z-index: 2;
+}
+
+.button {
+    position: absolute;
+    gap: 8px;
+    width: 64px;
+    margin-left: 225px;
+}
+
+.about-swiper-button-prev,
+.about-swiper-button-next {
+    position: absolute;
+    border: 1px solid #c3b49d;
+    border-radius: 8px;
+    padding: 12px;
+    width: 48px;
+    height: 48px;
+    background: #eee9e3;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.about-swiper-button-prev::after,
+.about-swiper-button-next::after {
+    display: none;
+}
+
+.about-swiper-button-prev {
+    left: 0;
+    transform: translate(-50%, -50%);
+    bottom: 0;
+}
+
+.about-swiper-button-next {
+    right: 0;
+    transform: translate(50%, -50%);
+    bottom: 0;
+}
+
+.about-swiper-button-prev svg {
+    stroke: #02060a;
+    width: 50%;
+    height: 50%;
+    display: block;
+    order: -1;
+}
+
+.about-swiper-button-next svg {
+    stroke: #02060a;
+    width: 50%;
+    height: 50%;
+    display: block;
+    order: 1;
+}
+
+.about-swiper-pagination {
+    position: static;
+    text-align: start;
+}
+
+.about-swiper-wrapper {
+    padding-bottom: 48px;
+    height: 28px;
+    margin-top: 40px;
+    display: flex;
+}
+
+.about-swiper-pagination-bullet {
+    background: #02060a;
+    opacity: 0.5;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    display: inline-block;
+    transition: opacity 0.3s;
+}
+
+.about-swiper .about-swiper-pagination .about-swiper-pagination-bullet-active {
+    background: #02060a;
+    opacity: 1;
+}
+
+/* === SVG СТРІЛКИ === */
+.about-swiper-button-prev svg,
+.about-swiper-button-next svg {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff;
+}
+
+/* === HOVER / FOCUS (опційно) === */
+.about-swiper-button-prev:hover,
+.about-swiper-button-next:hover,
+.about-swiper-button-prev:focus-visible,
+.about-swiper-button-next:focus-visible {
+    background: #c3b49d;
+    border-color: #02060a;
+}
+
+.about-swiper-button-prev:active,
+.about-swiper-button-next:active {
+    background-color: #c3b49d;
+    box-shadow: inset 0 4px 6px -2px rgba(0, 0, 0, 0.03),
+        inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
+}
+
+/* =====================================================
+   MOBILE ≥ 375px — адаптивний фікс
+===================================================== */
+/* @media screen and (min-width: 375px) {
+  .container-home-feet {
+    width: 375px;
+  }
+} */
+
+/* =====================================================
+   TABLET ≥ 768px
+===================================================== */
+@media screen and (min-width: 768px) {
+    /* .container-home-feet {
+    width: 768px;
+    margin: 0 auto;
+  } */
+
+    .about-swiper-slide {
+        aspect-ratio: 704 / 404;
+    }
+
+    .about-card-text {
+        max-width: 548px;
+        padding-left: 32px;
+        padding-bottom: 32px;
+    }
+
+    .about-swiper-button-prev,
+    .about-swiper-button-next {
+        top: 50%;
+        bottom: auto;
+    }
+
+    .about-swiper-pagination {
+        text-align: center;
+    }
+
+    .button {
+        all: unset;
+    }
+}
+
+/* =====================================================
+   DESKTOP ≥ 1440px
+===================================================== */
+@media screen and (min-width: 1440px) {
+    .home-feet-title {
+        font-size: 48px;
+    }
+
+    /* .container-home-feet {
+    width: 1440px;
+  } */
+
+    .about-swiper-slide {
+        aspect-ratio: 1312 / 753;
+    }
+
+    .about-card-text {
+        font-size: 18px;
+        padding-left: 64px;
+        padding-bottom: 64px;
+    }
+
+    .about-swiper-button-prev,
+    .about-swiper-button-next {
+        width: 64px;
+        height: 64px;
+    }
+
+    .about-swiper-button-prev svg,
+    .about-swiper-button-next svg {
+        width: 28px;
+        height: 28px;
+    }
+}

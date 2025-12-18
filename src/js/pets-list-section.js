@@ -45,7 +45,6 @@ async function handleContentLoad(e) {
     renderAnimals(animals);
     renderPagination();
     checkLoadMoreBtnStatus();
-  
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -226,7 +225,7 @@ function categoryTemplate(category) {
 }
 
 function categoriesTemplate(categories) {
-    return categories.reverse().map(categoryTemplate).join('');
+    return categories.map(categoryTemplate).join('');
 }
 
 function renderCategories(categories) {
