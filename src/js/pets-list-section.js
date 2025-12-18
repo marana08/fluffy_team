@@ -4,6 +4,7 @@ import { ENDPOINTS, server } from "./server-api";
 import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
+import { handleOpenModal } from "./animal-details-modal";
 
 
 
@@ -79,9 +80,10 @@ async function handleCategoryBtnClick(e) {
       categoryId = null;
       animals = await fetchAllAnimals();
     }
-      renderAnimals(animals);    
-      checkLoadMoreBtnStatus(); 
-      renderPagination();
+    renderAnimals(animals);    
+    checkLoadMoreBtnStatus(); 
+    renderPagination();
+    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
