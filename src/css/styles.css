@@ -1,9 +1,3 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
@@ -19,8 +13,3 @@
 @import url('./animal-details-modal.css');
 @import url('./order-modal.css');
 @import url('./footer.css');
-
-
-/* body {
-  background-color: black;
-} */

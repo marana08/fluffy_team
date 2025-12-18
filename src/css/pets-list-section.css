@@ -1,6 +1,7 @@
 .pagination {
     display: none;
 }
+
 .pets-section {
     padding: 64px 0 32px 0;
 }
@@ -68,6 +69,7 @@
     border-radius: 100px;
     background-color: #eee9e3;
 }
+
 .pets-list {
     display: flex;
     flex-wrap: wrap;
@@ -128,8 +130,8 @@
 }
 
 .descriprion-wrapper {
-   margin-top: auto;
-  
+    margin-top: auto;
+
 }
 
 .descriprion-list {
@@ -198,7 +200,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .pets-load-more-btn{
+    .pets-load-more-btn {
         display: none;
     }
 
@@ -252,7 +254,7 @@
 
     .pagination-btn.current,
     .pagination-btn:hover,
-    .pagination-btn:focus  {
+    .pagination-btn:focus {
         border: 1px solid #b3b4b5;
     }
 
@@ -270,10 +272,10 @@
         border: 1px solid #f6f4f1;
         background-color: #eee9e3;
         opacity: 0.4;
-    } 
+    }
 }
 
-@media screen and (min-width: 1440px) {  
+@media screen and (min-width: 1440px) {
     .pets-title {
         font-size: 48px;
     }
@@ -283,7 +285,7 @@
     }
 
     .category-list {
-        max-width: 100%; 
+        max-width: 100%;
         margin-bottom: 40px;
     }
 
@@ -319,8 +321,8 @@
     }
 
     .descriprion-wrapper {
-    margin-top: auto;
-    
+        margin-top: auto;
+
     }
 
     .descriprion-item {
@@ -345,45 +347,47 @@
 /* --------------- loader --------------- */
 
 .loader {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  position: relative;
-  background: linear-gradient(
-    0deg,
-    rgba(136, 118, 92, 0.2) 33%,
-    #88765c 100%
-  );
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    position: relative;
+    background: linear-gradient(0deg,
+            rgba(136, 118, 92, 0.2) 33%,
+            #88765c 100%);
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
 }
 
 .loader::after {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #f5f0eb;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f5f0eb;
 }
 
 @keyframes rotation {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .loader-center {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
 }
 
 .loader-hidden {
-  display: none;
+    display: none;
 }
-

@@ -1,4 +1,3 @@
-/* --- СТАНДАРТНІ СТИЛІ СЕКЦІЇ --- */
 #about {
   padding-top: 64px;
   padding-bottom: 64px;
@@ -13,13 +12,6 @@
   color: #02060a;
 }
 
-/* 
-.container-home-feet {
-  width: 100%; 
-  max-width: 100%;
-  margin: 0 auto;
-} */
-
 .about-swiper-parent {
   position: relative;
 }
@@ -30,7 +22,6 @@
   width: 100%;
 }
 
-/* !!! СЛАЙД !!! */
 .about-swiper-slide {
   position: relative;
   overflow: hidden;
@@ -140,7 +131,6 @@
 
 .about-swiper-wrapper {
   padding-bottom: 48px;
-  /* height: 28px; */
   margin-top: 40px;
   display: flex;
   align-items: stretch;
@@ -163,7 +153,6 @@
   opacity: 1;
 }
 
-/* === SVG СТРІЛКИ === */
 .about-swiper-button-prev svg,
 .about-swiper-button-next svg {
   width: 24px;
@@ -171,7 +160,6 @@
   fill: #ffffff;
 }
 
-/* === HOVER / FOCUS (опційно) === */
 .about-swiper-button-prev:hover,
 .about-swiper-button-next:hover,
 .about-swiper-button-prev:focus-visible,
@@ -187,23 +175,7 @@
     inset 0 12px 16px -4px rgba(0, 0, 0, 0.08);
 }
 
-/* =====================================================
-   MOBILE ≥ 375px — адаптивний фікс
-===================================================== */
-/* @media screen and (min-width: 375px) {
-  .container-home-feet {
-    width: 375px;
-  }
-} */
-
-/* =====================================================
-   TABLET ≥ 768px
-===================================================== */
 @media screen and (min-width: 768px) {
-  /* .container-home-feet {
-    width: 768px;
-    margin: 0 auto;
-  } */
 
 .about-swiper-button-prev {
   transform: translate(-50%,-100%);
@@ -238,17 +210,10 @@
   }
 }
 
-/* =====================================================
-   DESKTOP ≥ 1440px
-===================================================== */
 @media screen and (min-width: 1440px) {
   .home-feet-title {
     font-size: 48px;
   }
-
-  /* .container-home-feet {
-    width: 1440px;
-  } */
 
   .about-swiper-slide {
     aspect-ratio: 1312 / 753;
