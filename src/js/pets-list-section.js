@@ -4,12 +4,11 @@ import { ENDPOINTS, server } from "./server-api";
 import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
-import { handleOpenModal } from "./animal-details-modal";
 
 
 
 let limit = getLimitByScreen();
-let page = loadFromLS('page') || 1;
+let page = loadFromLS('page');
 let totalItems;
 let categoryId = loadFromLS('categoryId') ?? null;
 
@@ -35,17 +34,18 @@ function getTotalPages() {
 
 async function handleContentLoad(e) {
   showLoader();
-  page = 1;
+  page = 1;                
+  categoryId = null;        
+  saveToLS('page', 1);
+  saveToLS('categoryId', null);
   try {
     const categories = await fetchAllCategories();
     const animals = await fetchAllAnimals(); 
-      
     renderCategories(categories);
     renderAnimals(animals);
     renderPagination();
     checkLoadMoreBtnStatus();
   
-    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -77,13 +77,11 @@ async function handleCategoryBtnClick(e) {
     if (categoryName !== 'Всі') {
       animals = await fetchCategoryById(categoryId, page);
     } else {
-      categoryId = null;
       animals = await fetchAllAnimals();
     }
     renderAnimals(animals);    
     checkLoadMoreBtnStatus(); 
     renderPagination();
-    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
