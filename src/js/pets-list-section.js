@@ -6,6 +6,7 @@ import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
 
 
+
 let limit = getLimitByScreen();
 let page = loadFromLS('page') || 1;
 let totalItems;
@@ -15,7 +16,6 @@ document.addEventListener('DOMContentLoaded', handleContentLoad);
 refs.petsLoadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
 refs.categoryList.addEventListener('click', handleCategoryBtnClick);
 refs.petsListPagination.addEventListener('click', handlePaginationClick);
-
 
 
 function getLimitByScreen() {
@@ -36,13 +36,15 @@ async function handleContentLoad(e) {
   showLoader();
   page = 1;
   try {
-      const categories = await fetchAllCategories();
-      const animals = await fetchAllAnimals();   
+    const categories = await fetchAllCategories();
+    const animals = await fetchAllAnimals(); 
       
-      renderCategories(categories);
-      renderAnimals(animals);
-      renderPagination();
-      checkLoadMoreBtnStatus();
+    renderCategories(categories);
+    renderAnimals(animals);
+    renderPagination();
+    checkLoadMoreBtnStatus();
+  
+    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
