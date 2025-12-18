@@ -4,7 +4,6 @@ import { ENDPOINTS, server } from "./server-api";
 import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
-import { handleOpenModal } from "./animal-details-modal";
 
 
 
@@ -45,7 +44,7 @@ async function handleContentLoad(e) {
     renderPagination();
     checkLoadMoreBtnStatus();
   
-    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
+
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -83,7 +82,6 @@ async function handleCategoryBtnClick(e) {
     renderAnimals(animals);    
     checkLoadMoreBtnStatus(); 
     renderPagination();
-    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
