@@ -1,25 +1,54 @@
-<section class="success-stories-section" id="success-stories" aria-label="Секція успішних історій">
+<section
+  class="success-stories-section"
+  id="success-stories"
+  aria-label="Секція успішних історій"
+>
   <div class="container">
     <h3 class="success-stories-title">Щасливі історії, що надихають</h3>
-    <p class="success-stories-text">Ці хвостики вже знайшли свій дім. Ваш майбутній друг теж чекає на вас</p>
-    <div class="stories-loader loader" aria-label="Завантаження історій"></div>
-      <div class="swiper">
-        <div class="swiper-wrapper" aria-label="Слайди успішних історій"></div>
-          <div class="swiper-controls visually-hidden" id="swiper-controls">
-            <div class="swiper-pagination" id="swiper-pagination" aria-label="Навігація по слайдам"></div>
-              <div class="swiper-buttons" id="swiper-buttons">
-                <button class="swiper-button-prev" id="swiper-button-prev" aria-label="Попередній слайд" title="Попередній слайд">
-                  <svg class="arrow-icon" width="20" height="20">
-                    <use href="/img/sprite.svg#icon-arrow-back"></use>
-                  </svg>
-                </button>
-                <button class="swiper-button-next" id="swiper-button-next" aria-label="Наступний слайд" title="Наступний слайд">
-                  <svg class="arrow-icon" width="20" height="20">
-                    <use href="/img/sprite.svg#icon-arrow-forward"></use>
-                  </svg>
-                  </button>
-              </div>
-          </div>
+    <p class="success-stories-text">
+      Ці хвостики вже знайшли свій дім. Ваш майбутній друг теж чекає на вас
+    </p>
+    <div
+      class="stories-loader loader"
+      role="status"
+      aria-label="Завантаження історій"
+    ></div>
+    <div class="swiper">
+      <div
+        class="swiper-wrapper"
+        role="list"
+        aria-label="Слайди успішних історій"
+      ></div>
+      <div class="swiper-controls visually-hidden" id="swiper-controls">
+        <div
+          class="swiper-pagination"
+          id="swiper-pagination"
+          aria-label="Навігація по слайдам"
+          role="navigation"
+        ></div>
+        <div class="swiper-buttons" id="swiper-buttons">
+          <button
+            class="swiper-button-prev"
+            id="swiper-button-prev"
+            aria-label="Попередній слайд"
+            title="Попередній слайд"
+          >
+            <svg class="arrow-icon" width="20" height="20">
+              <use href="/img/sprite.svg#icon-arrow-back"></use>
+            </svg>
+          </button>
+          <button
+            class="swiper-button-next"
+            id="swiper-button-next"
+            aria-label="Наступний слайд"
+            title="Наступний слайд"
+          >
+            <svg class="arrow-icon" width="20" height="20">
+              <use href="/img/sprite.svg#icon-arrow-forward"></use>
+            </svg>
+          </button>
+        </div>
       </div>
+    </div>
   </div>
 </section>
