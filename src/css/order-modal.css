@@ -59,14 +59,21 @@ body.modal-open {
   padding-right: 20px;
   border-radius: 8px;
 }
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
 
 .icon-close {
   display: block;
   width: 32px;
   height: 32px;
-  position: absolute;
-  top: 16px;
-  right: 16px;
 }
 
 .modal-title {
@@ -139,7 +146,7 @@ body.modal-open {
 }
 
 @media only screen and (min-width: 768px) {
-  .modal-wrapper{
+  .modal-wrapper {
     width: 704px;
     padding-left: 32px;
     padding-right: 32px;
@@ -148,6 +155,10 @@ body.modal-open {
   .modal-title {
     font-size: 36px;
   }
+
+    .modal-form-textarea{
+      height: 180px;
+    }
 
   .modal-form-submit-btn {
     width: 240px;
@@ -158,20 +169,16 @@ body.modal-open {
 
 @media only screen and (min-width: 1440px) {
   .modal-wrapper {
-      width: 768px;
-      padding-left: 64px;
-      padding-right: 64px;
-    }
+    width: 768px;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
 
   .modal-title {
     font-size: 48px;
     max-width: 640px;
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .modal-close-btn {
-    cursor: pointer;
   }
 
   .modal-form-label {
