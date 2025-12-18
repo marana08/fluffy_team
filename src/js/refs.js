@@ -5,3 +5,8 @@ export const refs = {
     petsLoadMoreBtn: document.querySelector('.js-pets-load-more-btn'),
     petsListPagination: document.querySelector('.pagination'),
 }
+
+export const storiesParams = {
+    page: 1,
+    limit: 6,
+}
