@@ -15,17 +15,24 @@
   flex-direction: column;
   gap: 32px;
   margin-bottom: 80px;
+  align-items: center;
 }
-.footer-logo {
+.footer-logo-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   max-width: 302px;
-  max-height: 130px;
-  margin-left: auto;
-  margin-right: auto;
+  height: 130px;
+}
+.footer-logo-link {
+  max-width: 298px;
+  height: 97px;
+  margin: auto;
 }
 .footer-logo-icon {
   fill: #332c22;
   width: 100%;
-  height: 100%px;
+  height: 100%;
 }
 .footer-nav-link-list {
   display: flex;
