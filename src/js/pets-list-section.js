@@ -3,14 +3,22 @@ import iziToast from "izitoast";
 import { ENDPOINTS, server } from "./server-api";
 import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
+import spriteUrl from '/img/sprite.svg';
+import { handleOpenModal } from "./animal-details-modal";
+
+
+
 let limit = getLimitByScreen();
 let page = loadFromLS('page') || 1;
 let totalItems;
 let categoryId = loadFromLS('categoryId') ?? null;
+
 document.addEventListener('DOMContentLoaded', handleContentLoad);
 refs.petsLoadMoreBtn.addEventListener('click', handleLoadMoreBtnClick);
 refs.categoryList.addEventListener('click', handleCategoryBtnClick);
 refs.petsListPagination.addEventListener('click', handlePaginationClick);
+
+
 function getLimitByScreen() {
   const width = window.innerWidth;
 
@@ -21,19 +29,23 @@ function getLimitByScreen() {
 function getTotalPages() {
   return Math.ceil(totalItems / limit);
 }
+
+
 // --------------- handlers -------------------
 
 async function handleContentLoad(e) {
   showLoader();
   page = 1;
   try {
-      const categories = await fetchAllCategories();
-      const animals = await fetchAllAnimals();   
+    const categories = await fetchAllCategories();
+    const animals = await fetchAllAnimals(); 
       
-      renderCategories(categories);
-      renderAnimals(animals);
-      renderPagination();
-      checkLoadMoreBtnStatus();
+    renderCategories(categories);
+    renderAnimals(animals);
+    renderPagination();
+    checkLoadMoreBtnStatus();
+  
+    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -44,37 +56,45 @@ async function handleContentLoad(e) {
       hideLoader();
   }
 }
+
 async function handleCategoryBtnClick(e) {
-    if (e.target.nodeName !== 'BUTTON') return;
-    const categoryName = e.target.textContent;
-    const categoryLi = e.target.closest('li');
-    categoryId = categoryLi.dataset.id;
-    page = 1;
-    showLoader();
-    const allButtons = refs.categoryList.querySelectorAll('.category-btn');
-    allButtons.forEach(btn => {
-        btn.classList.remove('current');
-    });
-    e.target.classList.add('current');
-    try {
-        let animals = await fetchAllAnimals();
-        if (categoryName !== 'Всі') {
-            animals = await fetchCategoryById(categoryId, page);
-        }
-        renderAnimals(animals);
-        checkLoadMoreBtnStatus();
-        renderPagination();
-    } catch (error) {
-        iziToast.error({
-            title: 'Помилка',
-            message: 'Щось пішло не так',
-            position: 'topRight',
-        })
-    } finally {
-        hideLoader();
-        saveToLS('categoryId', categoryId);
-        saveToLS('page', page);
+  if (e.target.nodeName !== 'BUTTON') return;
+  const categoryName = e.target.textContent;
+  const categoryLi = e.target.closest('li');
+  categoryId = categoryLi.dataset.id; 
+  page = 1;
+  let animals;
+  showLoader();
+
+  const allButtons = refs.categoryList.querySelectorAll('.category-btn');
+  allButtons.forEach(btn => {
+    btn.classList.remove('current');
+  });
+  
+  e.target.classList.add('current');
+
+  try {
+    if (categoryName !== 'Всі') {
+      animals = await fetchCategoryById(categoryId, page);
+    } else {
+      categoryId = null;
+      animals = await fetchAllAnimals();
     }
+    renderAnimals(animals);    
+    checkLoadMoreBtnStatus(); 
+    renderPagination();
+    refs.petsList.addEventListener("click", (e) => handleOpenModal(e, animals));
+  } catch (error) {
+      iziToast.error({
+          title: 'Помилка',
+          message: 'Щось пішло не так',
+          position: 'topRight',
+      })
+  } finally {
+      hideLoader();
+      saveToLS('categoryId', categoryId);
+      saveToLS('page', page);
+  }
 }
 
 
@@ -115,35 +135,44 @@ async function handleLoadMoreBtnClick() {
         hideLoader();
         saveToLS('page', page);
         refs.loader.classList.remove('loader-center');
-    }
+    }  
 }
+
 async function handlePaginationClick(e) {
     const btn = e.target.closest('button');
     if (!btn) return;
+
     let animals;
+
     const totalPages = getTotalPages();
+
     if (btn.dataset.action === 'prev' && page > 1) {
         page -= 1;
     }
+
     if (btn.dataset.action === 'next' && page < totalPages) {
         page += 1;
     }
+
     if (btn.dataset.page) {
         page = Number(btn.dataset.page);
     }
+
     showLoader();
     try {
         if (categoryId) {
             animals = await fetchCategoryById(categoryId, page);
         } else {
          animals = await fetchAllAnimals(page);
-        }
+        }   
+
         renderAnimals(animals);
         renderPagination();
         window.scrollTo({
-            top: refs.petsList.offsetTop - 160,
+            top: refs.petsList.offsetTop - 80,
             behavior: 'smooth',
         });
+
         } catch (error) {
             iziToast.error({
                 title: 'Помилка',
@@ -155,11 +184,15 @@ async function handlePaginationClick(e) {
             saveToLS('page', page);
         }
 }
+
+
 // ----------------- API -----------------
+
 async function fetchAllCategories(page) {
-    const response = await server.get(`${ENDPOINTS.categories}`);
+    const response = await server.get(`${ENDPOINTS.categories}`);   
     return response.data;
 }
+
 async function fetchAllAnimals(page) {
     const response = await server.get(`${ENDPOINTS.animals}`, {
         params: {
@@ -167,9 +200,11 @@ async function fetchAllAnimals(page) {
             page: page
         }
     });
+
     totalItems = response.data.totalItems;
-    return response.data.animals;
+    return response.data.animals; 
 }
+
 async function fetchCategoryById(id, page) {
     const response = await server.get(`${ENDPOINTS.animals}?categoryId=${id}`, {
         params: {
@@ -237,17 +272,21 @@ function renderAnimals(animals) {
     const markup = animalsTemplate(animals);
     refs.petsList.innerHTML = markup;
 }
+
 function renderPagination() {
   const totalPages = getTotalPages();
   if (totalPages <= 1) return;
+
   let markup = '';
+
   markup += `<li>
-      <button class="pagination-btn-arrow" data-action="prev aria-label="Попередня сторінка"" ${page === 1 ? 'disabled' : ''}>
-        <svg class="arrow-icon" width="24" height="24">
-          <use href="/img/sprite.svg#icon-arrow-back"></use>
+      <button class="pagination-btn-arrow" data-action="prev" aria-label="Попередня сторінка" ${page === 1 ? 'disabled' : ''}>
+        <svg class="arrow-icon" aria-hidden="true" width="24" height="24">
+          <use href="${spriteUrl}#icon-arrow-back"></use>
         </svg>
       </button>
     </li>`;
+
   if (page === 1) {
     for (let i = 1; i <= Math.min(3, totalPages); i += 1) {
       markup += pageButton(i);
@@ -258,30 +297,37 @@ function renderPagination() {
     }
   } else {
       markup += pageButton(1);
+
     if (page > 3) {
       markup += `<li class="dots">…</li>`;
     }
+
     for (let i = page - 1; i <= page + 1; i += 1) {
       if (i > 1 && i < totalPages) {
         markup += pageButton(i);
       }
     }
+
     if (page < totalPages - 2) {
       markup += `<li class="dots">…</li>`;
     }
+
     if (totalPages > 1) {
       markup += pageButton(totalPages);
     }
   }
+
   markup += `<li>
       <button class="pagination-btn-arrow" data-action="next" aria-label="Наступна сторінка" ${page === totalPages ? 'disabled' : ''}>
-        <svg class="arrow-icon" width="24" height="24">
-          <use href="/img/sprite.svg#icon-arrow-forward"></use>
+        <svg class="arrow-icon" aria-hidden="true" width="24" height="24">
+          <use href="${spriteUrl}#icon-arrow-forward"></use>
         </svg>
       </button>
     </li>`;
+
   refs.petsListPagination.innerHTML = markup;
 }
+
 function pageButton(pageNumber) {
   return `
     <li>
@@ -294,6 +340,7 @@ function pageButton(pageNumber) {
     </li>
   `;
 }
+
 // --------------- loader ---------------
 
 function showLoader() {
@@ -323,3 +370,5 @@ function checkLoadMoreBtnStatus() {
         showLoadBtn();
     }
 }
+
+

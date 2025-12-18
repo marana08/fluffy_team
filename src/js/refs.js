@@ -6,7 +6,3 @@ export const refs = {
     petsListPagination: document.querySelector('.pagination'),
 }
 
-export const storiesParams = {
-    page: 1,
-    limit: 6,
-}
