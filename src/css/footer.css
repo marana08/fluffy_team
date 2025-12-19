@@ -120,3 +120,69 @@
     font-size: 14px;
   }
 }
+
+/* скрол вверх кнопка. стили на свое усмотрение */
+.scroll-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 56px;
+  height: 56px;
+  background-color: #f2aaaaff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease,
+    background-color 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scroll-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.scroll-to-top:hover,
+.scroll-to-top:focus {
+  background-color: #e89a9aff;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scroll-to-top:active {
+  transform: translateY(-2px);
+}
+
+.scroll-to-top-icon {
+  width: 24px;
+  height: 24px;
+  color: #02060a;
+  transition: transform 0.3s ease;
+}
+
+.scroll-to-top:hover .scroll-to-top-icon,
+.scroll-to-top:focus .scroll-to-top-icon {
+  transform: scale(1.1);
+}
+
+@media only screen and (max-width: 767px) {
+  .scroll-to-top {
+    bottom: 24px;
+    right: 24px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .scroll-to-top-icon {
+    width: 20px;
+    height: 20px;
+  }
+}

@@ -6,7 +6,8 @@ import './js/faq-section.js';
 import './js/success-stories-section.js';
 import './js/animal-details-modal.js';
 import './js/order-modal.js';
-import './js/server-api.js'
+import './js/server-api.js';
+import './js/scroll-to-top-button.js';
 
 // бібліотеки
 import axios from 'axios';
