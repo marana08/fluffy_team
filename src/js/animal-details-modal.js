@@ -55,7 +55,7 @@ function renderModal({
     </button>
     <div class="animal-modal-content">
       <div class="animal-modal-img-wrapper">
-        <img class="animal-modal-img" src="${image}" alt="${name}-${species}" />
+        <img class="animal-modal-img" src="${image}" alt="${name}-${species}" loading="lazy" />
       </div>
       <div class="animal-modal-info">
         <p class="animal-species">${species}</p>
