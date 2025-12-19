@@ -141,50 +141,52 @@ async function handleLoadMoreBtnClick() {
 }
 
 async function handlePaginationClick(e) {
-    const btn = e.target.closest('button');
-    if (!btn) return;
+  const btn = e.target.closest('button');
+  if (!btn) return;
 
-    let animals;
+  let animals;
+  
+  refs.loader.classList.add('loader-center');
+  showLoader();
 
-    const totalPages = getTotalPages();
+  const totalPages = getTotalPages();
 
-    if (btn.dataset.action === 'prev' && page > 1) {
-        page -= 1;
-    }
+  if (btn.dataset.action === 'prev' && page > 1) {
+      page -= 1;
+  }
 
-    if (btn.dataset.action === 'next' && page < totalPages) {
-        page += 1;
-    }
+  if (btn.dataset.action === 'next' && page < totalPages) {
+      page += 1;
+  }
 
-    if (btn.dataset.page) {
-        page = Number(btn.dataset.page);
-    }
+  if (btn.dataset.page) {
+      page = Number(btn.dataset.page);
+  }
 
-    showLoader();
-    try {
-        if (categoryId) {
-            animals = await fetchCategoryById(categoryId, page);
-        } else {
-         animals = await fetchAllAnimals(page);
-        }   
+  try {
+      if (categoryId) {
+          animals = await fetchCategoryById(categoryId, page);
+      } else {
+        animals = await fetchAllAnimals(page);
+      }   
 
-        renderAnimals(animals);
-        renderPagination();
-        window.scrollTo({
-            top: refs.petsList.offsetTop - 80,
-            behavior: 'smooth',
-        });
-
-        } catch (error) {
-            iziToast.error({
-                title: 'Помилка',
-                message: 'Щось пішло не так',
-                position: 'topRight',
-            })
-        } finally {
-            hideLoader();
-            saveToLS('page', page);
-        }
+      renderAnimals(animals);
+      renderPagination();
+      window.scrollTo({
+          top: refs.petsList.offsetTop - 80,
+          behavior: 'smooth',
+      });
+  } catch (error) {
+      iziToast.error({
+          title: 'Помилка',
+          message: 'Щось пішло не так',
+          position: 'topRight',
+      })
+  } finally {
+    hideLoader();
+    refs.loader.classList.remove('loader-center');
+    saveToLS('page', page);
+  }
 }
 
 
@@ -225,7 +227,7 @@ async function fetchCategoryById(id, page) {
 function categoryTemplate(category) {
     return `
      <li class="category-item" data-id="${category._id}">
-        <button class="category-btn" type="button">${category.name}</button>
+        <button class="category-btn" data-text="${category.name}" type="button">${category.name}</button>
       </li>`
 }
 
