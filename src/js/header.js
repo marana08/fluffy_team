@@ -7,22 +7,23 @@ const takeButton = document.querySelector('.modal-button');
 
 function closeModal(event) {
   modal.classList.remove('is-open');
+  document.body.classList.remove("is-modal-open");
+  document.removeEventListener("keydown", handleEscape);
 }
 
-document.addEventListener('keydown', event => {
-  const isEscape = event.key === 'Escape';
-  const isModalOpen = modal.classList.contains('is-open');
-  if (isEscape && isModalOpen) {
+function handleEscape(event) {
+  if (event.key === "Escape") {
     closeModal();
-    menuButton.blur();
   }
-});
+}
 
 takeButton.addEventListener('click', closeModal);
 
 menuButton.addEventListener('click', event => {
   event.preventDefault();
   modal.classList.add('is-open');
+  document.body.classList.add("is-modal-open");
+  document.addEventListener("keydown", handleEscape);
 });
 
 closeButton.addEventListener('click', closeModal);
