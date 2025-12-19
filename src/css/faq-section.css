@@ -1,4 +1,4 @@
-.faq-container {
+#faq {
   padding-top: 64px;
   padding-bottom: 64px;
 }
@@ -94,7 +94,7 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .faq-container {
+  #faq {
     padding-top: 80px;
     padding-bottom: 80px;
   }
