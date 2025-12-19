@@ -23,7 +23,7 @@ export function createHandlers(state) {
             setTotalItems(total);
             renderCategories(categories, null);
             renderAnimals(animals);
-            renderPagination(1, getTotalPages(total, limit), observeNewElements);
+            renderPagination(1, getTotalPages(total, limit));
             checkLoadMoreBtnStatus(1, getTotalPages(total, limit));
             refs.petsList.addEventListener('click', (e) => handleOpenModal(e, animals));
             observeNewElements(refs.petsList);

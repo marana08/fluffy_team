@@ -69,6 +69,14 @@ function scrollToTop() {
     top: 0,
     behavior: 'smooth',
   });
+  
+  setTimeout(() => {
+    import('./section-tracker.js').then((module) => {
+      if (module.resetSection) {
+        module.resetSection();
+      }
+    });
+  }, 500);
 }
 
 function createScrollHandler(button, header) {

@@ -15,3 +15,28 @@ export function loadFromLS(key) {
         return null;
     }
 }
+
+export function saveCurrentSection(sectionId) {
+    try {
+        localStorage.setItem('currentSection', sectionId);
+    } catch (error) {
+        console.error('Error saving current section:', error);
+    }
+}
+
+export function loadCurrentSection() {
+    try {
+        return localStorage.getItem('currentSection');
+    } catch (error) {
+        console.error('Error loading current section:', error);
+        return null;
+    }
+}
+
+export function clearCurrentSection() {
+    try {
+        localStorage.removeItem('currentSection');
+    } catch (error) {
+        console.error('Error clearing current section:', error);
+    }
+}
