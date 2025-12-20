@@ -213,6 +213,13 @@
     width: 64px;
     height: 64px;
   }
+  .about-swiper-button-prev {
+    left: -32px;
+  }
+
+  .about-swiper-button-next {
+    right: -32px;
+  }
 
   .about-swiper-button-prev svg,
   .about-swiper-button-next svg {
