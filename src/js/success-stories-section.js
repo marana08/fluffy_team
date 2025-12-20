@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
-        dynamicBullets: false,
+        dynamicBullets: true,
       },
 
       navigation: {
