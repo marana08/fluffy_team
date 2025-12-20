@@ -92,8 +92,6 @@ header {
     margin: 8px 0;
 }
 
-.header-burger-menu:focus {}
-
 .header-navigation-link,
 .modal-navigation-link {
     position: relative;

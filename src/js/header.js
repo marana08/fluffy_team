@@ -9,6 +9,7 @@ function closeModal(event) {
   modal.classList.remove('is-open');
   document.body.classList.remove("is-modal-open");
   document.removeEventListener("keydown", handleEscape);
+  menuButton.blur()
 }
 
 function handleEscape(event) {
