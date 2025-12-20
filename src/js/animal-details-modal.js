@@ -70,7 +70,7 @@ function renderModal({
           <p class="descriprion-text">${description}</p>
         </div>
         <div class="description-section">
-          <h3 class="descriprion-title">Здоров"я:</h3>
+          <h3 class="descriprion-title">Здоров'я:</h3>
           <p class="descriprion-text">${healthStatus}</p>
         </div>
         <div class="description-section last">
