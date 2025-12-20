@@ -5,7 +5,6 @@ import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
 import {openAnimalModal } from "./animal-details-modal";
-import { saveAnimals } from "./animals-store";
 
 let limit = getLimitByScreen();
 let page = loadFromLS('page');
@@ -282,7 +281,7 @@ function animalsTemplate(animals) {
 function renderAnimals(animals) {
   const markup = animalsTemplate(animals);
   refs.petsList.innerHTML = markup;
-  saveAnimals(animals);
+  saveToLS('animals', animals);
 }
 
 function renderPagination() {

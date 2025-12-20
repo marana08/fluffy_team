@@ -1,6 +1,6 @@
 import { refs } from "./refs";
 import spriteUrl from "../img/sprite.svg";
-import { getAnimalById } from "./animals-store";
+import { loadFromLS } from "./storage";
 
 refs.animalDetailsBackdrop.addEventListener('click', handleBackdropClick);
 let animalId = null;
@@ -9,9 +9,9 @@ export function getAnimalId() {
   return animalId;
 }
 
-
 export function openAnimalModal(id) {
-  const animal = getAnimalById(id);
+  const allAnimals = loadFromLS('animals');
+  const animal = allAnimals.find(animal => animal._id === id);
   if (!animal) return;
 
   renderModal(animal);
