@@ -25,7 +25,7 @@ import{a as W,i as h,S as z,N as oe,P as ae,A as se,R as re,b as K}from"./assets
           <p class="descriprion-text">${u}</p>
         </div>
         <div class="description-section">
-          <h3 class="descriprion-title">Здоров"я:</h3>
+          <h3 class="descriprion-title">Здоров'я:</h3>
           <p class="descriprion-text">${l}</p>
         </div>
         <div class="description-section last">
