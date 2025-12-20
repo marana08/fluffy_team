@@ -1,5 +1,6 @@
 /* Common styles */
 @import url('node_modules/modern-normalize/modern-normalize.css');
+@import url('./fonts.css');
 @import url('./reset.css');
 @import url('./base.css');
 @import url('./container.css');
@@ -14,3 +15,4 @@
 @import url('./animal-details-modal.css');
 @import url('./order-modal.css');
 @import url('./footer.css');
+@import url('./scroll-top.css');

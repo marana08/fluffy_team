@@ -1,0 +1,61 @@
+.scroll-top {
+    display: none;
+    position: fixed;
+    bottom: 32px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 2px solid #C3B49D;
+    background-color: #efe4d7;
+    color: #fff;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px) scale(0.8);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 800;
+}
+
+.icon-scroll {
+    transform: rotate(270deg);
+    stroke: #332C22;
+}
+
+
+.scroll-top:hover {
+    border: 3px solid #efe4d7;
+    background-color: #C3B49D;
+    color: #111;
+    box-shadow: 0 4px 12px rgba(244, 237, 141, 0.15);
+}
+
+.scroll-top:focus {
+    border: 3px solid #efe4d7;
+    /* outline: 2px solid #C3B49D;
+    outline-offset: 2px; */
+    background-color: #C3B49D;
+    color: #111;
+}
+
+.scroll-top:active {
+    transform: translateY(2px) scale(0.98);
+    background-color: #C3B49D;
+    color: #111;
+}
+
+@media only screen and (min-width: 1440px) {
+    .scroll-top {
+        display: flex;
+        right: calc((100vw - 1440px)/2 + 32px - 33px);
+    }
+
+    .scroll-top.show {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0) scale(1);
+    }
+}
