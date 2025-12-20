@@ -5,6 +5,7 @@ import { refs } from "./refs";
 import { loadFromLS, saveToLS } from "./storage";
 import spriteUrl from '/img/sprite.svg';
 import {openAnimalModal } from "./animal-details-modal";
+import { setLastFocusedElement } from "./focus";
 
 let limit = getLimitByScreen();
 let page = loadFromLS('page');
@@ -80,6 +81,10 @@ async function handleCategoryBtnClick(e) {
     renderAnimals(animals);    
     checkLoadMoreBtnStatus(); 
     renderPagination();
+    //!===============================================
+    const firstCard = refs.petsList.querySelector('li');
+    firstCard.focus();
+    //!===============================================
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -194,6 +199,9 @@ function handlePetsListClick(e) {
   const card = btn.closest('li');
   if (!card) return;
   const id = card.dataset.id;
+  //!==========================
+  setLastFocusedElement(btn);
+  //!========================
   openAnimalModal(id);
 }
 

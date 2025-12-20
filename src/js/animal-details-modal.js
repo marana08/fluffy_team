@@ -1,6 +1,9 @@
 import { refs } from "./refs";
 import spriteUrl from "../img/sprite.svg";
 import { getLastFocusedElement, setLastFocusedElement } from "./focus";
+//!===========================
+import { loadFromLS } from "./storage";
+//!===========================
 
 refs.animalDetailsBackdrop.addEventListener('click', handleBackdropClick);
 let animalId = null;
@@ -15,9 +18,12 @@ export function openAnimalModal(id) {
   if (!animal) return;
 
   renderModal(animal);
-
   refs.animalDetailsBackdrop.classList.add('is-open');
   document.body.style.overflow = 'hidden';
+  //!==============
+  const modal = document.querySelector('.animal-modal');
+  trapFocus(modal);
+//!=============
   const closeBtn = document.querySelector('.details-modal-close-btn');
   window.addEventListener('keydown', handleEscPress);
   closeBtn.addEventListener('click', handleCloseModalBtn);
