@@ -84,10 +84,8 @@ async function handleCategoryBtnClick(e) {
     checkLoadMoreBtnStatus(); 
     renderPagination();
 
-       //=========================================================
     const firstCard = refs.petsList.querySelector('li');
     if (firstCard) firstCard.focus();
-    //================
     
     refs.petsList.addEventListener('click', (e) => handleOpenModal(e, animals));
 
@@ -178,21 +176,19 @@ async function handlePaginationClick(e) {
           behavior: 'smooth',
       });
     
-       //=========================================================
     const firstCard = refs.petsList.querySelector('li');
     if (firstCard) firstCard.focus();
-    //================
 
-      } catch (error) {
-          iziToast.error({
-              title: 'Помилка',
-              message: 'Щось пішло не так',
-              position: 'topRight',
-          })
-      } finally {
-          hideLoader();
-          saveToLS('page', page);
-      }
+  } catch (error) {
+      iziToast.error({
+          title: 'Помилка',
+          message: 'Щось пішло не так',
+          position: 'topRight',
+      })
+  } finally {
+      hideLoader();
+      saveToLS('page', page);
+  }
 }
 
 

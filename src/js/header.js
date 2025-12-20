@@ -27,7 +27,7 @@ menuButton.addEventListener('click', event => {
   document.body.classList.add("is-modal-open");
   document.addEventListener("keydown", handleEscape);
 
-  trapFocus(modal);//=============
+  trapFocus(modal);
 });
 
 closeButton.addEventListener('click', closeModal);

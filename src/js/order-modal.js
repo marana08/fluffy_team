@@ -20,8 +20,6 @@ window.addEventListener('open-order-modal', (e) => {
   modalWindow.classList.remove('visually-hidden');
   document.body.classList.add('modal-open');
   window.addEventListener('keydown', onEscapePress);
-
-//=============
   const form = document.querySelector('.modal-order');
   trapFocus(form);
 });
@@ -43,8 +41,6 @@ function closeModalOrder() {
   modalWindow.classList.add('visually-hidden');
   document.body.classList.remove('modal-open');
   window.removeEventListener('keydown', onEscapePress);
-
-  //=========================
   const lastFocused = getLastFocusedElement();
   if (lastFocused) lastFocused.focus();
 }
@@ -138,7 +134,7 @@ formOrder.addEventListener('submit', async event => {
       icon: 'success',
       confirmButtonText: 'Закрити',
     }).then(() => {
-      const focusedEl = getLastFocusedElement(); //============
+      const focusedEl = getLastFocusedElement();
       if (focusedEl) focusedEl.focus();
     });
 

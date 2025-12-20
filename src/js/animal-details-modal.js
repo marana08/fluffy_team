@@ -14,7 +14,7 @@ export function handleOpenModal(e, allAnimals) {
   const card = e.target.closest('li');
   const id = card.dataset.id;
   const animal = allAnimals.find(animal => animal._id === id);
-  setLastFocusedElement(e.target);//===========
+  setLastFocusedElement(e.target);
   
   if (!animal) return;
   renderModal(animal);
@@ -23,7 +23,7 @@ export function handleOpenModal(e, allAnimals) {
   window.addEventListener('keydown', handleEscPress);
 
   const modal = document.querySelector('.animal-modal');
-  trapFocus(modal);//===========
+  trapFocus(modal);
 
   const closeBtn = document.querySelector('.details-modal-close-btn');
   closeBtn.addEventListener('click', handleCloseModalBtn);
@@ -95,7 +95,6 @@ function handleCloseModalBtn() {
   document.body.style.overflow = '';
   window.removeEventListener('keydown', handleEscPress);
 
-  //=============
   const lastFocused = getLastFocusedElement();
   if (lastFocused) lastFocused.focus();
 }
@@ -109,8 +108,6 @@ function handleBackdropClick(e) {
   handleCloseModalBtn();
 }
 
-
-//================
 export function trapFocus(modal) {
   modal.focus()
   const focusableSelectors = `
@@ -139,7 +136,3 @@ export function trapFocus(modal) {
     }
   });
 };
-
-// немає фокуса на бургер кнопці.
-// якщо треба табати на планеті, то додати таб по кругу модалки
-// перевірити на чому ловиться фокус у футері і виправити
