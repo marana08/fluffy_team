@@ -1,5 +1,6 @@
 import { refs } from "./refs";
 import spriteUrl from "../img/sprite.svg";
+import { getLastFocusedElement, setLastFocusedElement } from "./focus";
 
 refs.animalDetailsBackdrop.addEventListener('click', handleBackdropClick);
 let animalId = null;
@@ -10,16 +11,22 @@ export function getAnimalId() {
 
 export function handleOpenModal(e, allAnimals) {
   if (e.target.nodeName !== 'BUTTON') return;
-    const card = e.target.closest('li');
-    const id = card.dataset.id;
-    const animal = allAnimals.find(animal => animal._id === id);
+  const card = e.target.closest('li');
+  const id = card.dataset.id;
+  const animal = allAnimals.find(animal => animal._id === id);
+  setLastFocusedElement(e.target);//===========
+  
   if (!animal) return;
-    renderModal(animal);
-    refs.animalDetailsBackdrop.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleEscPress);
-    const closeBtn = document.querySelector('.details-modal-close-btn');
-    closeBtn.addEventListener('click', handleCloseModalBtn);
+  renderModal(animal);
+  refs.animalDetailsBackdrop.classList.add('is-open');
+  document.body.style.overflow = 'hidden';
+  window.addEventListener('keydown', handleEscPress);
+
+  const modal = document.querySelector('.animal-modal');
+  trapFocus(modal);//===========
+
+  const closeBtn = document.querySelector('.details-modal-close-btn');
+  closeBtn.addEventListener('click', handleCloseModalBtn);
   // поставимо клік на кнопку і передаємо id для модального вікна з формою
   const adoptBtn = document.querySelector('.modal-adopt-btn');
   // зберігаємо id у зовнішню змінну
@@ -27,7 +34,7 @@ export function handleOpenModal(e, allAnimals) {
   if (adoptBtn) {
     adoptBtn.addEventListener('click', () => {
       // повідомляємо order-modal про відкриття з потрібним id
-      window.dispatchEvent(new CustomEvent('open-order-modal', { detail: { animalId: animal._id } }));
+      window.dispatchEvent(new CustomEvent('open-order-modal', { detail: { animalId: animal._id },}));
     });
   }
 }
@@ -43,7 +50,7 @@ function renderModal({
   behavior,
 }) {
   const markup = `
-    <div class="animal-modal" data-id="${_id}">
+    <div class="animal-modal" data-id="${_id}" tabindex="-1" role="dialog">
     <button
       class="details-modal-close-btn"
       type="button"
@@ -87,6 +94,10 @@ function handleCloseModalBtn() {
   refs.animalDetailsBackdrop.classList.remove('is-open');
   document.body.style.overflow = '';
   window.removeEventListener('keydown', handleEscPress);
+
+  //=============
+  const lastFocused = getLastFocusedElement();
+  if (lastFocused) lastFocused.focus();
 }
 function handleEscPress(e) {
   if (e.code === 'Escape') {
@@ -97,3 +108,38 @@ function handleBackdropClick(e) {
   if (e.currentTarget !== e.target) return;
   handleCloseModalBtn();
 }
+
+
+//================
+export function trapFocus(modal) {
+  modal.focus()
+  const focusableSelectors = `
+    a[href],
+    button:not([disabled]),
+    textarea,
+    input,
+    select,
+    [tabindex]:not([tabindex="-1"])
+  `;
+
+  const focusableElements = modal.querySelectorAll(focusableSelectors);
+  const firstEl = focusableElements[0];
+  const lastEl = focusableElements[focusableElements.length - 1];
+
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+
+    if (e.shiftKey && document.activeElement === firstEl) {
+      e.preventDefault();
+      lastEl.focus();
+    };
+    if (!e.shiftKey && document.activeElement === lastEl) {
+      e.preventDefault();
+      firstEl.focus();
+    }
+  });
+};
+
+// немає фокуса на бургер кнопці.
+// якщо треба табати на планеті, то додати таб по кругу модалки
+// перевірити на чому ловиться фокус у футері і виправити

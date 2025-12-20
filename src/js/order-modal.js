@@ -1,6 +1,8 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { refs } from './refs';
+import { trapFocus } from './animal-details-modal';
+import { getLastFocusedElement, setLastFocusedElement } from './focus';
 // Модальне вікно «Залишіть заявку»
 let animal;
 const formOrder = document.getElementById('order-form');
@@ -18,6 +20,10 @@ window.addEventListener('open-order-modal', (e) => {
   modalWindow.classList.remove('visually-hidden');
   document.body.classList.add('modal-open');
   window.addEventListener('keydown', onEscapePress);
+
+//=============
+  const form = document.querySelector('.modal-order');
+  trapFocus(form);
 });
 
 function openModalOrder() {
@@ -37,6 +43,10 @@ function closeModalOrder() {
   modalWindow.classList.add('visually-hidden');
   document.body.classList.remove('modal-open');
   window.removeEventListener('keydown', onEscapePress);
+
+  //=========================
+  const lastFocused = getLastFocusedElement();
+  if (lastFocused) lastFocused.focus();
 }
 
 function onEscapePress(event) {
@@ -121,13 +131,19 @@ formOrder.addEventListener('submit', async event => {
     );
 
     const orderData = response.data;
-    Swal.fire({
+    closeModalOrder();
+        
+     Swal.fire({
       title: 'Дякуємо за вашу заявку!',
       icon: 'success',
       confirmButtonText: 'Закрити',
+    }).then(() => {
+      const focusedEl = getLastFocusedElement(); //============
+      if (focusedEl) focusedEl.focus();
     });
+
     event.target.reset();
-    closeModalOrder();
+  
     return orderData;
   } catch (error) {
     Swal.fire({

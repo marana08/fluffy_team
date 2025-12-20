@@ -83,6 +83,11 @@ async function handleCategoryBtnClick(e) {
     renderAnimals(animals);    
     checkLoadMoreBtnStatus(); 
     renderPagination();
+
+       //=========================================================
+    const firstCard = refs.petsList.querySelector('li');
+    if (firstCard) firstCard.focus();
+    //================
     
     refs.petsList.addEventListener('click', (e) => handleOpenModal(e, animals));
 
@@ -141,50 +146,53 @@ async function handleLoadMoreBtnClick() {
 }
 
 async function handlePaginationClick(e) {
-    const btn = e.target.closest('button');
-    if (!btn) return;
+  const btn = e.target.closest('button');
+  if (!btn) return;
+  let animals;
+  const totalPages = getTotalPages();  
 
-    let animals;
+  if (btn.dataset.action === 'prev' && page > 1) {
+      page -= 1;
+  }
 
-    const totalPages = getTotalPages();
+  if (btn.dataset.action === 'next' && page < totalPages) {
+      page += 1;
+  }
 
-    if (btn.dataset.action === 'prev' && page > 1) {
-        page -= 1;
-    }
+  if (btn.dataset.page) {
+      page = Number(btn.dataset.page);
+  }
 
-    if (btn.dataset.action === 'next' && page < totalPages) {
-        page += 1;
-    }
+  showLoader();
+  try {
+      if (categoryId) {
+          animals = await fetchCategoryById(categoryId, page);
+      } else {
+        animals = await fetchAllAnimals(page);
+      }   
 
-    if (btn.dataset.page) {
-        page = Number(btn.dataset.page);
-    }
+      renderAnimals(animals);
+      renderPagination();
+      window.scrollTo({
+          top: refs.petsList.offsetTop - 80,
+          behavior: 'smooth',
+      });
+    
+       //=========================================================
+    const firstCard = refs.petsList.querySelector('li');
+    if (firstCard) firstCard.focus();
+    //================
 
-    showLoader();
-    try {
-        if (categoryId) {
-            animals = await fetchCategoryById(categoryId, page);
-        } else {
-         animals = await fetchAllAnimals(page);
-        }   
-
-        renderAnimals(animals);
-        renderPagination();
-        window.scrollTo({
-            top: refs.petsList.offsetTop - 80,
-            behavior: 'smooth',
-        });
-
-        } catch (error) {
-            iziToast.error({
-                title: 'Помилка',
-                message: 'Щось пішло не так',
-                position: 'topRight',
-            })
-        } finally {
-            hideLoader();
-            saveToLS('page', page);
-        }
+      } catch (error) {
+          iziToast.error({
+              title: 'Помилка',
+              message: 'Щось пішло не так',
+              position: 'topRight',
+          })
+      } finally {
+          hideLoader();
+          saveToLS('page', page);
+      }
 }
 
 
@@ -248,7 +256,7 @@ function animalTemplate({ _id, name, image, species, age, gender, categories, de
         .join('');
     
     return `
-     <li class="pets-item" data-id="${_id}">
+     <li class="pets-item" data-id="${_id}" tabindex="0">
      <div class="pets-img-wrapper"><img class="pets-img" src="${image}" alt="${name} - ${species}" /></div>
         <div class="pets-list-wrapper">
           <p class="pets-category">${species}</p>
