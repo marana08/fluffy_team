@@ -78,13 +78,11 @@ async function handleCategoryBtnClick(e) {
     } else {
       animals = await fetchAllAnimals();
     }
-    renderAnimals(animals);    
+    renderAnimals(animals);
     checkLoadMoreBtnStatus(); 
     renderPagination();
-    //!===============================================
     const firstCard = refs.petsList.querySelector('li');
     firstCard.focus();
-    //!===============================================
   } catch (error) {
       iziToast.error({
           title: 'Помилка',
@@ -199,9 +197,7 @@ function handlePetsListClick(e) {
   const card = btn.closest('li');
   if (!card) return;
   const id = card.dataset.id;
-  //!==========================
   setLastFocusedElement(btn);
-  //!========================
   openAnimalModal(id);
 }
 
