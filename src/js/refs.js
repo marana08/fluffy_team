@@ -8,7 +8,7 @@ export const refs = {
 }
 
 export const storiesParams = {
-    page: 1,
+    page: 3,
     limit: 6,
 }
 
