@@ -30,16 +30,22 @@
 .animal-modal {
     position: relative;
     width: 335px;
-    min-height: 1012px;
+    max-height: 100%;
     padding: 64px 20px;
     background-color: #F6F4F1;
     border-radius: 8px;
     overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     transform: translateY(100%);
     opacity: 0;
     transition:
         opacity 300ms cubic-bezier(0.4, 0, 0.2, 1),
         translate 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animal-modal::-webkit-scrollbar {
+    display: none;
 }
 
 .animal-details-backdrop.is-open .animal-modal {
@@ -87,6 +93,18 @@
     object-fit: cover;
 }
 
+.animal-modal-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.desc-wrapper {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+}
+
 .animal-species,
 .animal-age,
 .animal-gender {
@@ -98,7 +116,7 @@
 }
 
 .animal-name {
-    font-family: “Open Sans”, sans-serif;
+    font-family: "Open Sans", sans-serif;
     margin-bottom: 8px;
     font-weight: 700;
     font-size: 32px;
@@ -158,7 +176,6 @@
 
     .animal-modal {
         width: 704px;
-        min-height: 685px;
         padding-left: 32px;
         padding-right: 32px;
     }
@@ -197,7 +214,6 @@
 @media only screen and (min-width: 1440px) {
     .animal-modal {
         width: 1312px;
-        min-height: 650px;
         padding: 64px;
     }
     
