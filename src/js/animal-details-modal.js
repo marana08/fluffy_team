@@ -67,7 +67,7 @@ function renderModal({
           <p class="animal-age">${age}</p>
           <p class="animal-gender">${gender}</p>
         </div>
-        <div class="description-section">
+          <div class="description-section">
           <h3 class="descriprion-title">Опис:</h3>
           <p class="descriprion-text">${description}</p>
         </div>
@@ -94,9 +94,9 @@ function handleCloseModalBtn() {
   const lastFocused = getLastFocusedElement();
   if (lastFocused) lastFocused.focus();
 }
-function handleEscPress(e) {
-  if (e.code === 'Escape') {
-    handleCloseModalBtn();
+export function handleEscPress(e) {
+  if (e.key === 'Escape') {    
+    handleCloseModalBtn();    
   }
 }
 function handleBackdropClick(e) {

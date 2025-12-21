@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { refs } from './refs';
-import { trapFocus } from './animal-details-modal';
+import { handleEscPress, trapFocus } from './animal-details-modal';
 import { getLastFocusedElement, setLastFocusedElement } from './focus';
 // Модальне вікно «Залишіть заявку»
 let animal;
@@ -15,6 +15,7 @@ window.addEventListener('open-order-modal', (e) => {
   // закриваємо детальну модалку (backdrop)
   if (refs && refs.animalDetailsBackdrop) {
     refs.animalDetailsBackdrop.classList.remove('is-open');
+    window.removeEventListener('keydown', handleEscPress);
   }
   document.body.style.overflow = '';
   modalWindow.classList.remove('visually-hidden');
