@@ -22,6 +22,8 @@ export function renderStories(stories) {
     const raty = new Raty(rating, {
       starType: 'svg',
       readOnly: true,
+      half: true,
+      halfShow: true,
     });
     raty.init();
   });
