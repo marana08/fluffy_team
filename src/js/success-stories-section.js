@@ -66,6 +66,11 @@ window.addEventListener('DOMContentLoaded', async () => {
 
     const swiper = new Swiper('.swiper', {
       direction: 'horizontal',
+      grabCursor: true,
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
       loop: false,
       speed: 400,
       spaceBetween: 32,
