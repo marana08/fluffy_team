@@ -4,15 +4,11 @@ import viteCompression from 'vite-plugin-compression';
 import FullReload from 'vite-plugin-full-reload';
 import handlebars from 'vite-plugin-handlebars';
 import { createHtmlPlugin } from 'vite-plugin-html';
+import critical from 'rollup-plugin-critical';
 
 export default defineConfig(() => {
   return {
     root: 'src',
-    input: 'main.js',
-    output: {
-      dir: 'dist',
-      format: 'es',
-    },
 
     server: {
       port: 5410,
@@ -26,7 +22,6 @@ export default defineConfig(() => {
       outDir: '../dist',
       emptyOutDir: true,
       sourcemap: true,
-      assetsInlineLimit: 51200,
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -43,6 +38,19 @@ export default defineConfig(() => {
     plugins: [
       handlebars({
         partialDirectory: path.resolve(__dirname, 'src/partials'),
+      }),
+
+      critical({
+        criticalUrl: 'dist/',
+        criticalBase: 'dist/',
+        criticalPages: [{ uri: 'index.html', template: 'index' }],
+        criticalConfig: {
+          inline: true,
+          dimensions: [
+            { width: 375, height: 667 }, // Mobile
+            { width: 1300, height: 900 }, // Desktop
+          ],
+        },
       }),
 
       createHtmlPlugin({ minify: true }),
