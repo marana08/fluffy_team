@@ -8,6 +8,11 @@ import { createHtmlPlugin } from 'vite-plugin-html';
 export default defineConfig(() => {
   return {
     root: 'src',
+    input: 'main.js',
+    output: {
+      dir: 'dist',
+      format: 'es',
+    },
 
     server: {
       port: 5410,
@@ -21,6 +26,7 @@ export default defineConfig(() => {
       outDir: '../dist',
       emptyOutDir: true,
       sourcemap: true,
+      assetsInlineLimit: 51200,
       minify: 'terser',
       terserOptions: {
         compress: {
@@ -36,7 +42,6 @@ export default defineConfig(() => {
 
     plugins: [
       handlebars({
-        // Шлях до паршалів
         partialDirectory: path.resolve(__dirname, 'src/partials'),
       }),
 

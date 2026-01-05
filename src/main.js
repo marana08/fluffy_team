@@ -1,4 +1,3 @@
-// локальні файли
 import './js/header.js';
 import './js/pets-list-section.js';
 import './js/about-us-section.js';
@@ -9,19 +8,4 @@ import './js/order-modal.js';
 import './js/server-api.js';
 import './js/scroll-top.js';
 
-// бібліотеки
-import axios from 'axios';
-
-// Accordion
-import Accordion from 'accordion-js';
-
-// Swiper
-import Swiper from 'swiper';
-import 'swiper/css';
-
-// SweetAlert2
-// import Swal from 'sweetalert2/dist/sweetalert2.js';
-// import 'sweetalert2/src/sweetalert2.scss';
-
-import './img/about-us-section/desk-1.jpg?format=webp';
-import './img/about-us-section/desk-2.jpg?format=webp';
+import 'modern-normalize';

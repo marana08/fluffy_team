@@ -1,5 +1,6 @@
-import Swiper from 'swiper/bundle';
-import 'swiper/css/bundle';
+import Swiper from 'swiper';
+import 'swiper/css';
+
 import { getStories } from './server-api';
 import { renderStories } from './success-stories-rndr';
 import iziToast from 'izitoast';
@@ -45,8 +46,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       hideLoader();
       const wrapper = document.querySelector('.swiper-wrapper');
       if (wrapper) {
-        wrapper.innerHTML =
-          '<p class="error-swiper">Не вдалося завантажити історії</p>';
+        wrapper.innerHTML = '<p class="error-swiper">Не вдалося завантажити історії</p>';
       }
       return;
     }
@@ -56,8 +56,7 @@ window.addEventListener('DOMContentLoaded', async () => {
       hideLoader();
       const wrapper = document.querySelector('.swiper-wrapper');
       if (wrapper) {
-        wrapper.innerHTML =
-          '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
+        wrapper.innerHTML = '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
       }
       return;
     }
@@ -99,8 +98,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     showError('Cталась помилка. Спробуйте пізніше');
     const wrapper = document.querySelector('.swiper-wrapper');
     if (wrapper) {
-      wrapper.innerHTML =
-        '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
+      wrapper.innerHTML = '<p class="error-swiper">Нажаль, історії зараз недоступні</p>';
     }
     hideLoader();
   }
