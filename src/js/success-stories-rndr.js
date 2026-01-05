@@ -9,9 +9,9 @@ export function renderStories(stories) {
       ({ description, rate, author }) =>
         `
         <div class="swiper-slide">
-          <div class="star-rating" data-score="${rate}"></div>     
+          <div class="star-rating" data-score="${rate}"></div>
             <p class="storie-text">${description}</p>
-            <p class="storie-names">${author}</p>  
+            <p class="storie-names">${author}</p>
         </div>`
     )
     .join('');

@@ -1,7 +1,7 @@
-import { refs } from "./refs";
-import spriteUrl from "../img/sprite.svg";
-import { loadFromLS } from "./storage";
-import { getLastFocusedElement, setLastFocusedElement } from "./focus";
+import spriteUrl from '../img/sprite.svg';
+import { getLastFocusedElement } from './focus';
+import { refs } from './refs';
+import { loadFromLS } from './storage';
 
 refs.animalDetailsBackdrop.addEventListener('click', handleBackdropClick);
 let animalId = null;
@@ -27,9 +27,11 @@ export function openAnimalModal(id) {
   const adoptBtn = document.querySelector('.modal-adopt-btn');
   if (adoptBtn) {
     adoptBtn.addEventListener('click', () => {
-      window.dispatchEvent(new CustomEvent('open-order-modal', {
-        detail: { animalId: animal._id },
-      }));
+      window.dispatchEvent(
+        new CustomEvent('open-order-modal', {
+          detail: { animalId: animal._id },
+        })
+      );
     });
   }
 }
@@ -97,8 +99,8 @@ function handleCloseModalBtn() {
   if (lastFocused) lastFocused.focus();
 }
 export function handleEscPress(e) {
-  if (e.key === 'Escape') {    
-    handleCloseModalBtn();    
+  if (e.key === 'Escape') {
+    handleCloseModalBtn();
   }
 }
 function handleBackdropClick(e) {
@@ -107,7 +109,7 @@ function handleBackdropClick(e) {
 }
 
 export function trapFocus(modal) {
-  modal.focus()
+  modal.focus();
   const focusableSelectors = `
     a[href],
     button:not([disabled]),
@@ -121,16 +123,16 @@ export function trapFocus(modal) {
   const firstEl = focusableElements[0];
   const lastEl = focusableElements[focusableElements.length - 1];
 
-  modal.addEventListener('keydown', (e) => {
+  modal.addEventListener('keydown', e => {
     if (e.key !== 'Tab') return;
 
     if (e.shiftKey && document.activeElement === firstEl) {
       e.preventDefault();
       lastEl.focus();
-    };
+    }
     if (!e.shiftKey && document.activeElement === lastEl) {
       e.preventDefault();
       firstEl.focus();
     }
   });
-};
+}

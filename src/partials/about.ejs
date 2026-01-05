@@ -1,0 +1,96 @@
+<% const absPartialsDir = process.cwd() + '/src/partials/'; %>
+<section id="about">
+  <div class="container">
+    <h2 class="about-title">Чому Хатинка Лапок</h2>
+
+    <div class="about-swiper-parent">
+      <div class="about-swiper mySwiper">
+        <div class="about-swiper-wrapper">
+          <div class="about-swiper-slide">
+            <%- include(absPartialsDir + 'about-images.ejs', { pathname: '1', alttext:
+            'Дівчина годує собаку' }) %>
+
+            <div class="about-card-text">
+              <p>
+                Все почалося у 2015 році з кількох небайдужих людей та одного
+                врятованого собаки. Сьогодні ми — один з найбільших притулків у
+                регіоні, але наша мета незмінна: дати другий шанс тим, кого
+                зрадили.
+              </p>
+            </div>
+          </div>
+          <div class="about-swiper-slide">
+            <%- include(absPartialsDir + 'about-images.ejs', { pathname: '2', alttext:
+            'Собака сумна, а потім радісно біжить' }) %>
+            <div class="about-card-text">
+              <p>
+                Ми рятуємо, реабілітуємо та знаходимо люблячі родини для
+                безпритульних тварин. Наша мета — не просто дати прихисток, а й
+                забезпечити кожному "хвостику" щасливе та повноцінне життя в
+                новій родині.
+              </p>
+            </div>
+          </div>
+          <div class="about-swiper-slide">
+            <%- include(absPartialsDir + 'about-images.ejs', { pathname: '3', alttext:
+            'Наша команда разом із тваринами' }) %>
+            <div class="about-card-text">
+              <p>
+                "Хатинка Лапок" — це команда професійних ветеринарів, кінологів
+                та десятків волонтерів, які щодня вкладають свою душу та час у
+                турботу про наших підопічних. Ми працюємо 24/7, бо їхнє життя
+                залежить від нас.
+              </p>
+            </div>
+          </div>
+          <div class="about-swiper-slide">
+            <%- include(absPartialsDir + 'about-images.ejs', { pathname: '4', alttext:
+            'Спортивний майданчик для наших улюбленців' }) %>
+            <div class="about-card-text">
+              <p>
+                Ми створили безпечний та комфортний простір. Кожна тварина
+                отримує якісне харчування, своєчасну ветеринарну допомогу,
+                проходить соціалізацію та гуляє на спеціально обладнаних
+                майданчиках.
+              </p>
+            </div>
+          </div>
+          <div class="about-swiper-slide">
+            <%- include(absPartialsDir + 'about-images.ejs', { pathname: '5', alttext:
+            'Собака в обіймах людини' }) %>
+            <div class="about-card-text">
+              <p>
+                Ваша допомога — безцінна. Ви можете взяти тваринку додому, стати
+                волонтером, допомогти фінансово або інформаційно. Кожен
+                маленький внесок наближає нас до великої мети — світу без
+                безпритульних тварин.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-swiper-controls">
+        <div class="about-swiper-pagination"></div>
+        <button
+          class="about-swiper-button-prev"
+          type="button"
+          aria-label="Попередній слайд"
+        >
+          <svg class="icon-arrow-prev">
+            <use href="/img/sprite.svg#icon-arrow-back"></use>
+          </svg>
+        </button>
+
+        <button
+          class="about-swiper-button-next"
+          type="button"
+          aria-label="Наступний слайд"
+        >
+          <svg class="icon-arrow-next">
+            <use href="/img/sprite.svg#icon-arrow-forward"></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

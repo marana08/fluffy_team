@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="uk">
-  <load src="./partials/head.html" />
+  <% const absPartialsDir = process.cwd() + '/src/partials/'; %>
+  <%- include(absPartialsDir + 'head.ejs') %>
   <body>
-    <load src="./partials/header.html" />
+    <%- include(absPartialsDir + 'header.ejs') %>
     <main>
-      <load src="./partials/hero.html" />
-      <load src="./partials/pets.html" />
-      <load src="./partials/about.html" />
-      <load src="./partials/faq.html" />
-      <load src="./partials/susccess-stories-section.html" />
-      <load src="./partials/animal-details-modal.html" />
-      <load src="./partials/order-modal.html" />
+      <%- include(absPartialsDir + 'hero.ejs') %>
+      <%- include(absPartialsDir + 'pets.ejs') %>
+      <%- include(absPartialsDir + 'about.ejs') %>
+      <%- include(absPartialsDir + 'faq.ejs') %>
+      <%- include(absPartialsDir + 'susccess-stories.ejs') %>
+      <%- include(absPartialsDir + 'animal-details-modal.ejs') %>
+      <%- include(absPartialsDir + 'order-modal.ejs') %>
     </main>
-    <load src="./partials/scroll-top.html" />
-    <load src="./partials/footer.html" />
+    <%- include(absPartialsDir + 'footer.ejs') %>
+    <%- include(absPartialsDir + 'scroll-top.ejs') %>
 
-    <script type="module" src="./main.js"></script>
+    <script
+      type="module"
+      src="./main.js"
+    ></script>
   </body>
 </html>

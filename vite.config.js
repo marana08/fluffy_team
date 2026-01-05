@@ -1,67 +1,63 @@
 import { defineConfig } from 'vite';
-import { glob } from 'glob';
-import injectHTML from 'vite-plugin-html-inject';
+import { imagetools } from 'vite-imagetools';
+import viteCompression from 'vite-plugin-compression';
 import FullReload from 'vite-plugin-full-reload';
-import SortCss from 'postcss-sort-media-queries';
-import { beasties } from 'vite-plugin-beasties';
-import { imagePresets, hdPreset } from 'vite-plugin-image-presets';
+import { createHtmlPlugin } from 'vite-plugin-html';
+import path from 'path';
 
 export default defineConfig(({ command }) => {
   return {
-    define: {
-      [command === 'serve' ? 'global' : '_global']: {},
-    },
     root: 'src',
+
+    server: {
+      port: 5410,
+      open: true,
+      watch: {
+        ignored: ['**/.stylelintcache', '**/.eslintcache'],
+      },
+    },
+
     build: {
       sourcemap: true,
-      rollupOptions: {
-        input: glob.sync('./src/*.html'),
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              return 'vendor';
-            }
-          },
-          entryFileNames: chunkInfo => {
-            if (chunkInfo.name === 'commonHelpers') {
-              return 'commonHelpers.js';
-            }
-            return '[name].js';
-          },
-          assetFileNames: assetInfo => {
-            if (assetInfo.name && assetInfo.name.endsWith('.html')) {
-              return '[name].[ext]';
-            }
-            return 'assets/[name]-[hash][extname]';
-          },
-        },
-      },
       outDir: '../dist',
       emptyOutDir: true,
-    },
-    plugins: [
-      injectHTML(),
-      FullReload(['./src/**/**.html']),
-      imagePresets({
-        hero: hdPreset({
-          class: 'img-fluid',
-          formats: {
-            avif: { quality: 60 },
-            webp: { quality: 70 },
-            original: { quality: 80 },
-          },
-        }),
-      }),
-      SortCss({
-        sort: 'mobile-first',
-      }),
-      beasties({
-        options: {
-          preload: 'swap',
-          pruneSource: true, // Enable pruning CSS files
-          inlineThreshold: 4000, // Inline stylesheets smaller than 4kb
-          reduceInlineStyles: true,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
         },
+      },
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'src/index.html'),
+        },
+      },
+    },
+
+    plugins: [
+      createHtmlPlugin({
+        minify: true,
+        pages: [
+          {
+            filename: 'index.html',
+            template: 'index.html',
+            injectOptions: {
+              data: { baseUrl: '/fluffy_team/' },
+            },
+          },
+        ],
+      }),
+
+      imagetools({
+        include: '**/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp}*',
+      }),
+
+      FullReload(['./src/**/**.html']),
+
+      viteCompression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        verbose: false,
       }),
     ],
   };

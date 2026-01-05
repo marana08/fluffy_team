@@ -1,16 +1,13 @@
 export const refs = {
-    categoryList: document.querySelector('.js-category-list'),
-    petsList: document.querySelector('.js-pets-list'),
-    loader: document.querySelector('.js-loader'),
-    petsLoadMoreBtn: document.querySelector('.js-pets-load-more-btn'),
-    petsListPagination: document.querySelector('.pagination'),
-    animalDetailsBackdrop: document.querySelector('.animal-details-backdrop'),
-}
+  categoryList: document.querySelector('.js-category-list'),
+  petsList: document.querySelector('.js-pets-list'),
+  loader: document.querySelector('.js-loader'),
+  petsLoadMoreBtn: document.querySelector('.js-pets-load-more-btn'),
+  petsListPagination: document.querySelector('.pagination'),
+  animalDetailsBackdrop: document.querySelector('.animal-details-backdrop'),
+};
 
 export const storiesParams = {
-    page: 3,
-    limit: 6,
-}
-
-
-
+  page: 3,
+  limit: 6,
+};

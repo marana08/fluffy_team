@@ -16,11 +16,11 @@ export const server = axios.create({
 export async function getStories(page = storiesParams.page) {
   try {
     // Валідація параметрів
-    const validLimit = typeof storiesParams.limit === 'number' && storiesParams.limit > 0 
-      ? storiesParams.limit 
+    const validLimit = typeof storiesParams.limit === 'number' && storiesParams.limit > 0
+      ? storiesParams.limit
       : 6;
-    const validPage = typeof page === 'number' && page >= 1 
-      ? page 
+    const validPage = typeof page === 'number' && page >= 1
+      ? page
       : 1;
 
     const response = await server.get(`${ENDPOINTS.feedbacks}`, {
