@@ -363,10 +363,14 @@
 /* --------------- loader --------------- */
 
 .loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    position: relative;
     background: linear-gradient(0deg,
             rgba(136, 118, 92, 0.2) 33%,
             #88765c 100%);
@@ -383,7 +387,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #f5f0eb;
+    background: transparent;
 }
 
 @keyframes rotation {
