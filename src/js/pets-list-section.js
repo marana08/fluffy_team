@@ -29,7 +29,6 @@ function getTotalPages() {
   return Math.ceil(totalItems / limit);
 }
 
-
 // --------------- handlers -------------------
 
 async function handleContentLoad(e) {
@@ -99,8 +98,6 @@ async function handleCategoryBtnClick(e) {
 
 async function handleLoadMoreBtnClick() {
     page += 1;
-
-    refs.loader.classList.add('loader-center');
     showLoader();
 
     try {
@@ -135,7 +132,6 @@ async function handleLoadMoreBtnClick() {
     } finally {
         hideLoader();
         saveToLS('page', page);
-        refs.loader.classList.remove('loader-center');
     }  
 }
 
@@ -144,8 +140,6 @@ async function handlePaginationClick(e) {
   if (!btn) return;
 
   let animals;
-  
-  refs.loader.classList.add('loader-center');
   showLoader();
 
   const totalPages = getTotalPages();
@@ -185,7 +179,6 @@ async function handlePaginationClick(e) {
       })
   } finally {
     hideLoader();
-    refs.loader.classList.remove('loader-center');
     saveToLS('page', page);
   }
 }
@@ -231,7 +224,6 @@ async function fetchCategoryById(id, page) {
     totalItems = response.data.totalItems;
     return response.data.animals;
 }
-
 
 
 // ----------------- render -----------------
